@@ -82,3 +82,6 @@ def dist2(L1,L2):
             else:
                 bearings = bearings + str(b+360)
         print(bearings)
+
+dist2(LocA,LocB)
+print("-----------------------------------------------------------")
