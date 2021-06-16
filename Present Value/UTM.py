@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May 24 19:09:32 2021
-
-@author: james
-"""
-
 import math
 
 def CalculateDistance(n1, e1, n2, e2):
@@ -63,11 +56,13 @@ def dist2(L1,L2):
         print(L2)
         print("Distance: " + str(round(d,2)) + " m")
         eastBool = True
+        northBool = True
         direction = "Direction: "
         if dy < 0:
             direction = direction + "North-"
         else:
             direction = direction + "South-"
+            northBool = False
         if dx < 0:
             direction = direction + "East"
         else:
@@ -76,37 +71,14 @@ def dist2(L1,L2):
         print(direction)
         b = round(math.degrees(math.atan(dx/dy)),1)
         bearings = "Bearings: "
-        if eastBool:
-            bearings = bearings + str(b+180) + "°"
+        if eastBool == True:
+            if northBool == True:
+                bearings = bearings + str(b+180)
+            else:
+                bearings = bearings + str(b-180)
         else:
-            bearings = bearings + str(b-180) + "°"
+            if northBool == True:
+                bearings = bearings + str(b-180)
+            else:
+                bearings = bearings + str(b+360)
         print(bearings)
-        print(b+360)
-        
-        
-        
-        
-        
-
-
-
-
-
-
-
-d1 = CalculateDistance(3696,457,2763,967)
-d2 = CalculateDistance(763,967,801,240)
-d3 = CalculateDistance(2801,240,3696,457)
-
-
-dist2(LocB,LocC)
-#dist2(LocB,LocC)
-#dist2(LocC,LocA)
-
-print("-----------------------------------------------------------")
-
-b1 = CalculateBearing(3696,457,2763,967)
-b2 = CalculateBearing(763,967,801,240)
-b3 = CalculateBearing(2801,240,3696,457)
-
-print(d1, b1, d2, b2, d3, b3)
