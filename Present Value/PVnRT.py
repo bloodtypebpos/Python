@@ -99,14 +99,14 @@ def getOp(inputString,sOp,fOp):
         try:
             r = float(r)
             if checkWholeNumber(r):
-                r = int(r)
+                r = int(r)                
+                if r >= sOp and r<=fOp:
+                    rBool = False
+                else:
+                    print("' " + str(r) + " ' is not a valid input. Please try again...")                
             else:
-                r = sOp-1
+                print("' " + str(r) + " ' is not a valid input. Please try again...")
         except:
-            print("' " + str(r) + " ' is not a valid input. Please try again...")
-        if r >= sOp and r<=fOp:
-            rBool = False
-        else:
             print("' " + str(r) + " ' is not a valid input. Please try again...")
     return r
 
@@ -198,10 +198,7 @@ def makeEm():
     makeTable(hdr, theRows)
     plt.scatter(pressure, volume)
     plt.xlabel("Pressure (atm)")
-    plt.ylabel("Volume (liters")
-    plt.scatter(pressure, volume)
+    plt.ylabel("Volume (liters)")
     plt.show()
 
 makeEm()
-
-
