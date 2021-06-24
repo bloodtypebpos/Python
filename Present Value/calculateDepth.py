@@ -31,13 +31,20 @@ def CalculateDepth(Q, n, b, z, s):
     val = 1
     while(error > accuracy):
         if val < 100:
-            
+            print("-------------------------------------------------------------")
+            print("val: " + str(val))
+            print("y: " + str(y))
+            print("error: " + str(error))
+            print("accuracy: " + str(accuracy))
+            print("increment: " + str(increment))
             dQ = TrapezoidalQ(n, b, y, z, s)
+            print("dQ: " + str(dQ))
             error = Q-dQ
+            print("new error: " + str(error))
             if error > 0:
-                y = y - increment
-            else:
                 y = y + increment
+            else:
+                y = y - increment
                 increment = increment/2
                 error = -error
             val = val + 1
@@ -49,7 +56,8 @@ def CalculateDepth(Q, n, b, z, s):
     return y
             
     
-    
+y = CalculateDepth(Q, n, b, z, s)
+print(y)
     
     
     
