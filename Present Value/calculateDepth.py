@@ -28,9 +28,11 @@ def CalculateDepth(Q, n, b, z, s):
     accuracy = 0.01
     increment = 0.1
     y = 1
+    oldYval = 1
     val = 1
     while(error > accuracy):
         if val < 100:
+            oldYval = y
             print("-------------------------------------------------------------")
             print("val: " + str(val))
             print("y: " + str(y))
@@ -53,7 +55,7 @@ def CalculateDepth(Q, n, b, z, s):
             if stopit == "Yes":
                 error = 1
                 accuracy = 2
-    return y
+    return oldYval
 
 
 
