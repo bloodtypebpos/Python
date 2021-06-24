@@ -22,4 +22,38 @@ z = 2
 s = 0.01
 #(hint: A depth of 1 foot will give you Q =  25.1 cfs)
 
-
+def CalculateDepth(Q, n, b, z, s):
+    print("Here goes....")
+    error = 1
+    accuracy = 0.01
+    increment = 0.1
+    y = 1
+    val = 1
+    while(error > accuracy):
+        if val < 100:
+            
+            dQ = TrapezoidalQ(n, b, y, z, s)
+            error = Q-dQ
+            if error > 0:
+                y = y - increment
+            else:
+                y = y + increment
+                increment = increment/2
+                error = -error
+            val = val + 1
+        else:
+            stopit = input("Wanna stop this mess?")
+            if stopit == "Yes":
+                error = 1
+                accuracy = 2
+    return y
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
