@@ -120,19 +120,20 @@ def CalculateVolume(P,n,T):
 def getPressure():
     inputString = "Enter units for pressure of gas in \n1. atm \n2. in Hg \n3. psi \n"
     pop = getOp(inputString, 1, 3) -1
-    inputString = "Please enter the value for pressure in " + psTypes[pop] + ": "
+    inputString = "Please enter the value for Pressure in " + psTypes[pop] + ": "
     P = getFloat(inputString)
     return P, pop
 
 def getTemp():
     inputString = "Select your Temperature scale \n1. Celsius \n2. Fahrenheit \n3. Kelvin \n"
     top = getOp(inputString, 1, 3) -1
-    inputString = "Please enter the value for pressure in " + tsTypes[top] + ": "
+    inputString = "Please enter the value for Temperature in " + tsTypes[top] + ": "
     T = getFloat(inputString)
     return T, top    
 
 
 def convertTemp(T,top1,top2):
+    #The 3 lines here for ureg are just setting the baseline for our temperature units
     ureg = UnitRegistry(autoconvert_offset_to_baseunit = True)
     ureg.default_format = '.3f'
     Q_ = ureg.Quantity
@@ -169,10 +170,9 @@ for i in range(0,3):
 
 hdr = ["Input Temperature","Temp in K", "Input Pressure","P in atm", "Volume in liters"]
 rows = []
-kTemps = []
-atmPs = []
-Vs = []
+
 n = 1
+#rounding is how many decimal places will show
 rounding = 5
 
 for i in range(0,len(Ts)):
@@ -186,6 +186,8 @@ for i in range(0,len(Ts)):
 print(" ")
 
 makeTable(hdr,rows)
+
+
 
 # Temps
 ##########
