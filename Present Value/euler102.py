@@ -3,6 +3,10 @@ import openpyxl
 import os
 import numpy as np
 
+# Installing openpyxl:
+# python -m pip install openpyxl
+# openpyxl is a package for using Microsoft Excel files easily
+
 # The assignment says we can choose any problem from the list on the website. The instructor claims to have solved the first 100 problems.
 # We will therefore solve a problem over 100 that looks pretty solvable as to not bore the instructor... but also because there is likely
 # a good application somewhere there. We'll find the first easy problem over 100 that also has practical use
@@ -17,17 +21,21 @@ import numpy as np
 #
 # The websites we will follow along with are from wolfram-alpha:
 # Convex Hull: https://mathworld.wolfram.com/ConvexHull.html
+# The below website is the site we specifically used the formulas from to find the answer
 # Triangle Interior: https://mathworld.wolfram.com/TriangleInterior.html
 
+# This is the directory we save our files to
 dbDir = r'C:\Users\Matt\Desktop\James'
+# fname is combining the directory and filename.extension into one file name for use
 fname = os.path.join(dbDir, 'p102_triangles.xlsx')
+# This is opening the excel file calling it wb for workbook
 wb = openpyxl.load_workbook(fname)
+# This is getting the sheet names in the workbook and making them into an array
 shts = wb.sheetnames
+# This is opening the first sheet in the workbook
 sht = wb[shts[0]]
-
+# This finds the maximum row in the worksheet. We add 1 to it for when we do for-loops
 maxRow = sht.max_row + 1
-
-colors = ["Red","Orange","Yellow","Green","Blue","Purple","Brown","Black","Gray"]
 
 X1 = []
 X2 = []
@@ -110,6 +118,5 @@ for i in range(0,len(X1)):
     total = total + outVal
     
 print(total)
-
-
-#checkTriangle(0)
+# Check any triangle visually by plugging in the number row in the excel file
+#checkTriangle(1)
