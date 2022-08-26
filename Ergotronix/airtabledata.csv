@@ -1,0 +1,623 @@
+Reference,Customer,Part,Description,PONUM,VENDOR,QTY,CODE,ETA,COMPLETE,STATUS,NOTES,PRICE,SUBASSEMBLY,
+EI-13946-TK,Gemcor,MISC PARTS,"ES220201-A, Flat Pattern, Sand Blast, Powder Coat",MT-220622-2,Globe Trailers,4,Order,,checked,[Remove],"ES220201-A
+--------------
+Base Bottom Sheet Metal",$390.00 ,1-BASE,
+EI-13946-TK,Gemcor,ES220201-B,Base Tubes,,,4,Machine,,,MTL IN HOUSE,STEEL,$125.00 ,1-BASE,
+EI-13946-TK,Gemcor,ES220201-Q**,Base Electrical Cover **,,,2,Machine,,,Redesigning,STEEL,$150.00 ,1-BASE,
+EI-13946-TK,Gemcor,ES180201-A-F,Base Foot Lock Mount,,,8,Machine,,,MTL IN HOUSE,ALUMINUM (1.25 X 2 X 4.75),$40.00 ,1-BASE,
+EI-13946-TK,Gemcor,ETP024,Rear Caster Mount,,,8,Inventory,,,,,$20.00 ,1-BASE,
+EI-13946-TK,Gemcor,ES220201-P,Base Caster Control Arms,,Lample,8,Order,,,,STAINLESS STEEL,$50.00 ,1-BASE,
+EI-13946-TK,Gemcor,ETP128,Rear Caster,,,8,Inventory,,,,,$47.81 ,1-BASE,
+EI-13946-TK,Gemcor,62805K460,HI-CAP Leveling...,,McMaster,8,Order,,,,,$10.00 ,1-BASE,
+EI-13946-TK,Gemcor,8880T952,*** U-Bolts,,McMaster,8,Order,,,,,$2.00 ,1-BASE,
+EI-13946-TK,Gemcor,*** Handle Bar,*** Handle Bar,,Lample,2,Order,,,,**Price based off Ultramet,$100.00 ,1-BASE,
+EI-13946-TK,Gemcor,Junction Box,"Junction Box ( 8 x 8 x 4 )
+https://www.rexelusa.com/p/28821/junction-box-nema-4x-screw-cover-8-x-8-x-4/980060066904/8x8x4-jct-box-w-cvr
+",,Rexel,2,Order,,,,,$64.67 ,1-BASE,
+EI-13946-TK,Gemcor,ETP346,Strain Relief 69915K51,,McMaster,36,Inventory,,,,,$4.00 ,1-BASE,
+EI-13946-TK,Gemcor,***Terminal Blocks,***Terminal Blocks,,McMaster,4,Order,,,,,$0.00 ,1-BASE,
+EI-13946-TK,Gemcor,CUSTOMER SPEC  MAT,Gemcor Power SUpply RHINO PSM ( PSM24-600S1),EH-220421,Automation Direct,2,Order,8/16/2022,checked,[Remove],"8/17/22 DELIVERED. DB
+
+8/16/22 800-633-0405
+
+8/16/22 Shipped  in 2 pcs Fed Ex tracking # 602711483952, ETA 8/16/22, tracking # 602711483963 ETA 8/16/22. DB
+
+8/9/22 Rec'd email, new ship date 8/18/22. DB 
+
+7/19/22 Called Sue: Expected to ship 9/9/22. DB
+
+7/11/22 Called April for ETA, back ordered expected to ship 9/9/22. DB
+
+6/30/22 New ETA on back order to ship 9/9/22. DB
+
+5/11/22 Confirmed back order for ETA 7/8/22. DB
+
+5/5/22 Called for ETA - back ordered until 7/8/22. DB",$397.00 ,1-BASE,
+EI-13946-TK,Gemcor,Power Supply Rail,Din Rail,,McMaster,2,Order,,,,,$10.00 ,1-BASE,
+EI-13946-TK,Gemcor,Actuator J21803 ,"30.5"" Stroke Actuators",EH-2202-19,Linak US Inc.,8,Order,5/19/2022,checked,[Remove],"DELIVERED 5/16/22. DB
+
+2/122 Francis handles orders/shipping 502-253-5595, fgibbs@linak-us.com
+Judson Harten (sales rep) jharten@linak-us.com, 502-253-5595 office, 502-318-2112 direct .
+
+5/12/22 Called & emailed for ETA. Confirmed order is shipping today. DB
+
+5/6/22 Received updated Confirmation with revised ship date to 5/12/22. DB
+
+5/5/22 Called Judson on direct line, scheduled to ship 5/9/22.  May have container delays out of China. DB 
+
+3/16 Confirmation letter ETA 5/6/22. DB
+
+3/4/22 Original ETA 5/2/22. DB","$1,069.79 ",2-COLUMN,
+EI-13946-TK,Gemcor,Programming Cable Kit 0367999,"Programming Cable KitWeb36biz
+",EH-2202-19,Linak US Inc.,1,Order,5/19/2022,checked,[Remove],"DELIVERED 5/16/22. DB
+
+2/122 Francis handles orders/shipping 502-253-5595, fgibbs@linak-us.com
+Judson Harten (sales rep) jharten@linak-us.com, 502-253-5595 office, 502-318-2112 direct .
+
+5/12/22 Called & emailed for ETA. Confirmed order is shipping today. DB
+
+5/6/22 Received updated Confirmation with revised ship date to 5/12/22. DB
+
+5/5/22 Called Judson on direct line, scheduled to ship 5/9/22. May have container delays out of China. DB  
+
+3/4/22 Original ETA 5/2/22. DB",$111.63 ,2-COLUMN,
+EI-13946-TK,Gemcor,Handset HB41000,Hand Pendant,EH-2202-19,Linak US Inc.,1,Order,5/19/2022,checked,[Remove],"DELIVERED 5/16/22. DB
+
+2/122 Francis handles orders/shipping 502-253-5595, fgibbs@linak-us.com
+Judson Harten (sales rep) jharten@linak-us.com, 502-253-5595 office, 502-318-2112 direct .
+
+5/19/22 EH-2202-19 – Shipped on 5/12.  Waiting on tracking info. Email from Robert Mote, Inside Sales Engineer, LINAK U.S. Inc.
+2200 Stanley Gault Pkwy, Louisville, KY 40223, Tel: (502) 292-5695
+
+5/18/22 LMOM for Jud on ETA's. DB
+
+5/12/22 Called & emailed for ETA. Confirmed order is shipping today. DB
+
+5/6/22 Received updated Confirmation with revised ship date to 5/12/22. DB
+
+5/5/22 Called Judson on direct line, scheduled to ship 5/9/22. May have container delays out of China. DB  
+
+3/4/22 Original ETA 5/2/22. DB
+",$66.14 ,2-COLUMN,
+EI-13946-TK,Gemcor,EIP424,Ergo I Base Plate,,,8,Inventory,,checked,,MODIFY PLATE,$50.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,ES180202-B-G,Column Base Actuator Mount,,,8,Machine,,checked,MTL IN HOUSE,ALUMINUM,$50.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,Column Shipping,Each Way,,,2,Order,,checked,,,$200.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,REWORK,Fabricate Outer Column,EH-2204-01,Dawid Mfg.,8,Order,7/27/2022,checked,[Remove],"7/27/22 Received. DB
+
+7/26/22 Leigh Dawid, President, Dawid Manufacturing Inc.
+26 Beaver Street, Ansonia, CT 06401
+Best contact: Cell: 203-218-6998
+2nd Best contact: dawidinfo@ap-mfg.com
+3rd Best contact (no office) Ph: 203-734-1800, ext 302   
+
+7/26/22 ETA from YRC is 7/27/22. DB
+
+7/19/22 Ready to ship back today after lunch. Sent BOL to Dawid to pick up shipment on 7/20/22. YRC tracking # 670-846671-X. DB
+
+7/12/22 Leigh returned email: Job is in progress, expected to be completed next week, Tues/Wed. DB 
+
+7/11/22 Emailed Leigh for update. DB
+
+6/21/22 Leigh responded by email to inquiry: We have scheduled to get back on the job. We expect to finish in 3-4 weeks. DB
+
+6/16/22 Matt removed hold & req'd ETA. DB
+
+5/10/22 Leigh called back: Placed hold on order today. All are tooled and 1 pc has hole drilled. 
+
+5/10/22 Called again, no answer/voicemail. Emailed again for confirmation that order is on hold. DB
+
+[5/6/2022]
+Matt tried calling the office on any extension but all mailboxes are full and nobody is answering the phone. Matt emailed Leigh requesting to put the order on hold.
+
+This order is on hold until Ted comes back from the customer. We will decide how to proceed from there
+----------------------------------------------
+4/26/2022 Rec'd order back for reworking on 4/25, will take 2-3 weeks. DB
+
+4/19/2022 Parts shipped to Dawid for reworking YRC 656-776389-2. DB
+
+4/8/22 Parts not shipped back to Dawig yet. Matt & Doreen have called yet unable to reach Leigh, mailbox is full. Sent email requesting Leigh to call Matt directly for details. DB
+--------------------------------------------
+
+",$200.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,REWORK,Fabricate Inner Column,EH-2204-01,Dawid Mfg.,8,Order,7/27/2022,checked,[Remove],"7/27/22 Received. DB
+
+7/26/22 Leigh Dawid, President, Dawid Manufacturing Inc.
+26 Beaver Street 
+Ansonia, CT 06401
+Best contact: Cell: 203-218-6998
+2nd Best contact: dawidinfo@ap-mfg.com
+3rd Best contact (no office) Ph: 203-734-1800, ext 302   
+
+7/26/22 ETA from YRC is 7/27/22. DB
+
+7/19/22 Ready to ship back today after lunch. Sent BOL to Dawid to pick up shipment on 7/20/22. YRC tracking # 670-846671-X. DB
+
+7/12/22 Leigh returned email: Job is in progress, expected to be completed next week, Tues/Wed. DB 
+
+7/11/22 Emailed Leigh for update. DB
+
+6/21/22 Leigh responded by email to inquiry: We have scheduled to get back on the job. We expect to finish in 3-4 weeks. DB
+
+6/16/22 Matt removed hold & req'd ETA. DB
+
+5/10/22 Leigh called back: Placed hold on order today. All are tooled and 1 pc has hole drilled. 
+
+
+5/10/22 Called again, no answer/voicemail. Emailed again for confirmation that order is on hold. DB
+
+[5/6/2022]
+Matt tried calling the office on any extension but all mailboxes are full and nobody is answering the phone. Matt emailed Leigh requesting to put the order on hold.
+
+This order is on hold until Ted comes back from the customer. We will decide how to proceed from there
+----------------------------------------------
+
+4/26/2022 Rec'd order back for reworking on 4/25, will take 2-3 weeks. DB
+
+4/19/2022 Parts shipped to Dawid for reworking YRC 656-776389-2. DB
+
+4/8/22 Parts not shipped back to Dawig yet. Matt & Doreen have called yet unable to reach Leigh, mailbox is full. Sent email requesting Leigh to call Matt directly for details. DB
+--------------------------------------------
+",$240.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,***Column Paint,***Column Paint (Gray),,C.A.T.,16,Order,,,,,,,
+EI-13946-TK,Gemcor,EIP410,Plastic Slide,,,48,Inventory,,checked,,,$2.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,ES180202-B-H,Column Top Actuator Mount,,,8,Machine,,checked,MTL IN HOUSE,ALUMINUM,$50.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,EIP423-TopPlate Gemcor,Modified EIP423,,,8,Inventory,,checked,,MODIFY PLATE,$75.00 ,2-COLUMN,
+EI-13946-TK,Gemcor,MISC PARTS,"ES220201-G, Plat Pattern (1), Sand Blast, Powder Coat",MT-220622-2,Globe Trailers,8,Order,,checked,[Remove],"ES220201-G
+---------------------
+Top Column Saddle",$145.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-D,Top Weld Tube - D,,,4,Machine,,checked,,STEEL-WELD,$120.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-E,Top Weld Tube - E,,,4,Machine,,checked,,STEEL-WELD,$86.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-F,Top Weld Tube - F,,,8,Machine,,checked,,STEEL-WELD,$86.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-H,Top Weld Tube - H,,,8,Machine,,checked,,STEEL-WELD,$20.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-J,Top Weld Tube - J,,,2,Machine,,checked,,STEEL-WELD,$86.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-K,Top Weld Tube - K,,,8,Machine,,checked,,STEEL-WELD,$20.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-L,Top Weld Tube - L,,,4,Machine,,checked,,STEEL-WELD,$70.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-M,Top Weld Tube - M,,,4,Machine,,checked,,STEEL-WELD,$13.00 ,3-TOP,
+EI-13946-TK,Gemcor,ES220201-N,Top Weld Tube - N,,,8,Machine,,checked,,STEEL-WELD,$30.00 ,3-TOP,
+EI-13946-TK,Gemcor,***Top Weldment,***Top Weldment,,Dan Kuntz,2,Order,,checked,,,$495.00 ,3-TOP,
+EI-13946-TK,Gemcor,***Top Paint,***Top Paint (Wet Black),,C.A.T.,2,Order,,,,,$0.00 ,3-TOP,
+EI-13946-TK,Gemcor,EI-TABLETOP,Gemcore Table TOp,EH-2204-15,Woodcrafters,2,Order,8/23/2022,,Ordered,"8/25/22 LMOM for update on tabletop. DB
+
+8/18/22 941-751-6610 Located in Bradenton for pick up per contract. 
+
+8/9/22 Drove over to Vendor, they are still in business, phone & internet is not working and may not for a while. Tabletop in production, Estimated completion date is 2 weeks. DB
+
+8/4/22 Voicemail box was full, emailed at  wewiii@aol.com for an estimated completion date. DB
+
+7/26/22 Voicemail box was full, emailed at  wewiii@aol.com for an estimated completion date. Called again, no answer on 7/27/22. DB
+
+6/17/22 Matt & Ed are working on this. DB
+
+6/2/22 Order still on hold as per Ed. DB
+
+5/24/22 Ted going to Gemcor 5/25 to discuss a possible order. DB
+
+5/18/22 Ted provided update that Matt had placed table on hold until we decide if Ergotronix is taking the order or not. DB
+
+5/10/22 Email to Ted:  My customer has decided not to make the tables larger, please continue with the original size tables. Let me know if the June 30th date for the shipment is still good.
+
+5/5/22 Ed confirmed order is not placed at this time. Waiting for Customer to provide information.
+Need to call Woodcrafters to notify if order is to be in 1 or 2 pieces. DB
+----------------------------------------------
+[5/6/2022]
+This is currently on hold until we hear back from Ted on the status of the Gemcor 
+----------------------------------------------","$1,450.00 ",3-TOP,
+EI-13946-TK,Gemcor,ES220201-R,Bridge Bracket,,,4,Machine,,,,ALUMINUM,$40.00 ,3-TOP,
+ET-13987-H,Chromalloy,ETP021-ET220113,"Extended Mast - 87.5""",,,1,Machine,,checked,,,$0.00 ,2-MAST,
+ET-13987-H,Chromalloy,ETP604-ET220113,Extended ET600 Rails,EH-2205-02,Ewellix USA,2,Order,5/13/2022,checked,[Remove],"PAID IN FULL 5/16/22. DB
+
+7/12/22 AKA SKF, 267-436-6785, 267-436-6036, 800-313-4753
+
+7/12/22 Shipped in 2 orders;
+1Z86WA420359953450
+1Z86WA420358545867
+ETA 7/13/22. DB
+
+5/12/22 Marked for removal. DB
+
+5/12/22 Rec'd. DB
+
+5/9/22 Called 800# for tracking 1Z86WA420352644332, Label made-not picked up yet. DB
+
+
+",$0.00 ,2-MAST,
+ET-13987-H,Chromalloy,ETP606,Angle Iron,,,1,Inventory,,checked,,,$0.00 ,2-MAST,
+ET-13987-H,Chromalloy,ETP119,Brushes,,,1,Inventory,,checked,,,$0.00 ,2-MAST,
+ET-13987-H,Chromalloy,ETP018-ET220113,Extended Ball Screw,,,1,Machine,,checked,,,$0.00 ,2-MAST,
+ET-13987-H,Chromalloy,Chromalloy Baseplate,**** Chromalloy Baseplate,,,1,Machine,,checked,ALUMINUM,0.75 X 13 X 21,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113J,**** Base Big Side Plate,,,1,Machine,,checked,ALUMINUM,0.75 X 4 X 20.5,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113K,**** Base Small Side Plate,,,2,Machine,,checked,ALUMINUM,0.25 X 4 X 11.25,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113C,**** Base Indexing Plate,,,1,Machine,,checked,ALUMINUM,0.75 X 14 X 14,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113V,Side Plate Back,,,1,Machine,,checked,ALUMINUM,,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,**** ETP1010-ET220113,**** Mast Support,,,1,Machine,,checked,ALUMINUM,0.75 X 8 X 14,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113B,**** Motor Mount,,,1,Machine,,checked,ALUMINUM,0.5 X 4 X 8,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113A,Base Upper Bearing Carrier,,,1,Machine,,checked,ALUMINUM,0.625 X 2.5 X 3.5,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,60355K22,Ball Bearing,,McMaster,1,Order,,checked,,,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,EHP455,Chief Tapered Bearing A,,,1,Inventory,,checked,,,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,EHP456,Chief Tapered Bearing B,,,1,Inventory,,checked,,,$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,Power Supply,Mean-Well HEP-600-24,,TRC,1,Order,,checked,,"Earl ordered this outside of SAGE through TRC. 
+Mean-Well HEP-600-24
+Order Number: 341210
+Customer Purchase Order: Web
+Order Date: 5/9/2022
+Qty: 2
+Price: $264 ea
+Cost: $528
+",$0.00 ,1-BASE,
+ET-13987-H,Chromalloy,ET220113S,Fixed Base Shaft,,,1,Machine,,checked,STEEL-WELD,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113G,Fixed Base Shaft Mount Plate,,,1,Machine,,checked,STEEL-WELD,0.25 PLATE,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113E,Fixed Base Cross,,,2,Machine,,checked,STEEL-WELD,TUBE 2X2,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113F + ET220113H,Fixed Base Angle,,,2,Machine,,checked,STEEL-WELD,ANGLE 2X3,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113P,Fixed Base Ears,,,2,Machine,,checked,STEEL-WELD,0.25 X 1.5 X 3,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113U,Fixed Base Shaft Propeller Big,,,2,Machine,,checked,STEEL-WELD,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113T,Fixed Base Shaft Propeller Small,,,1,Machine,,checked,STEEL-WELD,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,Fixed Base Spring,**** Fixed Base Spring,,McMaster,2,Order,,checked,,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,Fixed Base Bushings,**** Fixed Base Bushings,,McMaster,2,Order,,checked,,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113L,Fixed Base Latch Pedal Shaft,,,1,Machine,,checked,STEEL,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113Q,Fixed Base Latch Pedal,,,1,Machine,,checked,ALUMINUM,0.25 X 4 X 7,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113M,Fixed Base Latch Peg,,,1,Machine,,checked,STEEL,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,ET220113R,Fixed Base Latch Block,,,2,Machine,,checked,ALUMINUM,0.75 X 0.75 X 2,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,6436K16,Clamp,,McMaster,2,Order,,checked,,,$0.00 ,0-SWIVEL,
+ET-13987-H,Chromalloy,6436K21,Clamp,,McMaster,1,Order,,checked,,,$0.00 ,0-SWIVEL,
+ET-14103-TK,Gillette,ET220402-ETP070,Ext-Base,,,1,Machine,,checked,,,,0-BASE,
+ET-14103-TK,Gillette,ETP052-ET220402,Custom Spacers,,,4,Machine,,checked,,,,0-BASE,
+ET-14103-TK,Gillette,ET-CASTER3IN,"3"" Front Casters",,,2,Inventory,,checked,,,,0-BASE,
+ET-14103-TK,Gillette,ET220402-B,"VERTICAL SUPPORT, MAIN",,,1,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-C,"ANGLED SUPPORT, MAIN",,,1,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-A,"HORIZONTAL SUPPORT, MAIN",,,1,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-F,CROSS SUPPORT,,,2,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-E,"RAIL, MAIN TROLLEY",,,1,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-M,END PLATE,,,1,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-D,"SUPPORT, ROD",,,2,Machine,,checked,,STEEL-WELD,,1-BOOM,
+ET-14103-TK,Gillette,ET220402-G,"GROUND SHAFT, PRECISION TROLLEY",,,1,Machine,,checked,,Precision Ground,,2-SLIDE,
+ET-14103-TK,Gillette,ET220402-J,"MOUNT, HOOK",,,2,Machine,,checked,,STEEL,,2-SLIDE,
+ET-14103-TK,Gillette,ET220402-K,"BEARING BRACKET, LOWER",,,1,Machine,,checked,,ALUMINUM,,2-SLIDE,
+ET-14103-TK,Gillette,ET220402-L,"BEARING MOUNT, UPPER",,,1,Machine,,checked,,ALUMINUM,,2-SLIDE,
+ET-14103-TK,Gillette,3525T619,Hook,,McMaster,1,Order,,checked,,,,2-SLIDE,
+ET-14103-TK,Gillette,EHP218,Ergo Chief  NB Bearing,,,1,Inventory,,checked,,,,2-SLIDE,
+ET-14103-TK,Gillette,5634K590,Handle,,McMaster,1,Order,,checked,,,,2-SLIDE,
+ET-14103-TK,Gillette,92311A718,Threaded Rod - Handle,,McMaster,1,Hardware,,checked,,,,2-SLIDE,
+ET-14103-TK,Gillette,9452K38,O-Ring Bumper Stop,,McMaster,2,Hardware,,checked,,,,2-SLIDE,
+ET-14103-TK,Gillette,92949A72,HW,,McMaster,1,Hardware,,checked,,,,2-SLIDE,
+ET-14103-TK,Gillette,92196A544,HW,,McMaster,2,Hardware,,checked,,,,2-SLIDE,
+EH-14074-H,Advanced Airfoil ,ET211215H,Pedestal Bottom Mount,,,2,Machine,,checked,,STEEL-WELD,$0.00 ,1-BASE,
+EH-14074-H,Advanced Airfoil ,ET211215J,Pedestal Vertical support,,,4,Machine,,checked,,STEEL-WELD,$0.00 ,1-BASE,
+EH-14074-H,Advanced Airfoil ,ET211215K,Pedestal Outside Support,,,2,Machine,,checked,,STEEL-WELD,$0.00 ,1-BASE,
+EH-14074-H,Advanced Airfoil ,ET211215L,Pedestal Inside Support,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,1-BASE,
+EH-14074-H,Advanced Airfoil ,ET211215M,Pedestal Support Bracket,,,2,Machine,,checked,,STEEL-WELD,$0.00 ,1-BASE,
+EH-14074-H,Advanced Airfoil ,ET211215G,Pedestal Top Mount,,,2,Machine,,checked,,STEEL-WELD,$0.00 ,1-BASE,
+ET-14073-H,Amazon,"ET-CASTER4""-600lbs.",ET600 Casters,,,2,Inventory,,,NOT READY,,$0.00 ,0-BASE,
+ET-14073-H,Amazon,CUSTOMER SPEC  MAT,Amazon base plate per attached drawing,EH-2207-05,Die-Verse Tool & Mfg.,1,Order,7/27/2022,checked,[Remove],"7/28/22  Picked up Base Plate by DB today.
+
+7/27/22 941-723-2288, ETP1001-ET220303----Custom Extended Base Plate
+
+7/27/22 Laurie called: Our base is ready for pick up - they are open until 4:30pm. DB
+
+7/19/22 Called and left message with Chris to have Laurie call me back as she's at lunch. Material received today and in production. should ship 8/8/22. DB","$1,485.00 ",0-BASE,
+ET-14073-H,Amazon,ETP1005 ET220303,Custom Extended Legs,,Die-Verse,2,Machine,,checked,READY,"ALUMINUM
+MTL COST: $65
+LABOR: 1 HR",$115.00 ,0-BASE,
+ET-14073-H,Amazon,Leg Stiffener,Leg Stiffener,,,2,Machine,,checked,READY,"ALUMINUM
+MTL COST: $65
+LABOR: 1 HR",$115.00 ,0-BASE,
+ET-14073-H,Amazon,Base Plate Stiffener,Base Plate Stiffener,,,1,Machine,,checked,READY,"ALUMINUM
+MTL: $125
+LABOR: 2 HR",$225.00 ,0-BASE,
+ET-14073-H,Amazon,Base Buttress,Base Buttress,,,2,Machine,,checked,READY,"ALUMINUM
+MTL COST: $0 - SCRAP SHELF
+LABOR: 1.5 HR",$75.00 ,0-BASE,
+ET-14073-H,Amazon,ETP057-Amazon,Custom Caster Control Bar,,,1,Machine,,,,STAINLESS STEEL,$0.00 ,0-BASE,
+ET-14073-H,Amazon,Bar Support,Bar Support,,,2,Machine,,checked,READY,"ALUMINUM
+MTL: $0 - SCRAP SHELF
+LABOR: 2 HR",$50.00 ,0-BASE,
+ET-14073-H,Amazon,ETP021-ET220303,"EXT ET650 MAST 79""",,,1,Machine,,checked,,"MTL COST: $140 (PER SAGE)
+LABOR: 3 HR",$300.00 ,1-MAST,
+ET-14073-H,Amazon,ETP606,Angle Iron,,,1,Inventory,,checked,,,$27.00 ,1-MAST,
+ET-14073-H,Amazon,ETP105-ET220303,"EXT ET650 BALL SCREW 79.5""",,,1,Machine,,checked,,"MTL COST: $340.28 (PER SAGE)
+LABOR: 3 HR",$500.00 ,1-MAST,
+ET-14073-H,Amazon,ETP119,Brushes,,,1,Inventory,,checked,,,$25.00 ,1-MAST,
+ET-14073-H,Amazon,ETP604-ET220303,"Extended Rails 79""",,Ewellix,1,Order,,checked,,Amazon LLTHR 15-2006.6 P5/E38,$264.37 ,1-MAST,
+ET-14073-H,Amazon,FRAME 104 WELDMENT,FRAME 104 WELDMENT,,Dan Kuntz,1,Order,,,,,$0.00 ,2-BACK FRAME,
+ET-14073-H,Amazon,Back Frame 001,Back Frame 001,,,1,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 2 HR",$191.00 ,2-BACK FRAME,checked
+ET-14073-H,Amazon,Back Frame 012,Back Frame 012,,,1,Machine,,checked,MTL IN HOUSE,WELD-STAINLESS STEEL,$116.00 ,2-BACK FRAME,checked
+ET-14073-H,Amazon,Back Frame 003,Back Frame 003,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1 HR",$141.00 ,2-BACK FRAME,checked
+ET-14073-H,Amazon,Back Frame 004,Back Frame 004,,,1,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1 HR",$141.00 ,2-BACK FRAME,checked
+ET-14073-H,Amazon,Arm Frame 010,Arm Frame 010,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1 HR",$141.00 ,2-BACK FRAME,checked
+ET-14073-H,Amazon,Back Frame 013,Back Frame 013,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 0.5 HR",$116.00 ,2-BACK FRAME,checked
+ET-14073-H,Amazon,Arm Frame 101,Arm Frame 101,,Dan Kuntz,1,Order,,,,,$0.00 ,3-BOTH ARMS,
+ET-14073-H,Amazon,Arm Frame 102,Arm Frame 102,,Dan Kuntz,1,Order,,,,,$0.00 ,3-BOTH ARMS,
+ET-14073-H,Amazon,Arm Frame 020,Arm Frame 020,,,1,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1.5 HR",$166.00 ,3-SIDE ARM 101,checked
+ET-14073-H,Amazon,Arm Frame 016,Arm Frame 016,,,1,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1 HR",$141.00 ,3-SIDE ARM 101,checked
+ET-14073-H,Amazon,Arm Frame 012,Arm Frame 012,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 0.5 HR",$116.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 017,Arm Frame 017,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 0.5 HR",$116.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 011,Arm Frame 011,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 0.5 HR",$116.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 007,Arm Frame 007,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1.5 HR",$166.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 006,Arm Frame 006,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 0.5 HR",$116.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 002,Arm Frame 002,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 0.5 HR",$116.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 003,Arm Frame 003,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1.5 HR",$166.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 001,Arm Frame 001,,,2,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1.5 HR",$166.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Lift pad,Lift pad,,,4,Machine,,checked,MTL IN HOUSE,WELD-STAINLESS STEEL,$116.00 ,3-BOTH ARMS,checked
+ET-14073-H,Amazon,Arm Frame 004,Arm Frame 004,,,1,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1 HR",$141.00 ,3-SIDE ARM 101,checked
+ET-14073-H,Amazon,Arm Frame 009,Arm Frame 009,,,1,Machine,,checked,MTL IN HOUSE,"WELD-STAINLESS STEEL
+MTL COST: $91
+LABOR: 1.5 HR",$166.00 ,3-SIDE ARM 101,checked
+ET-14073-H,Amazon,Lift pad back plate,Lift pad back plate,,,4,Machine,,,,STEEL,$0.00 ,3-BOTH ARMS,
+ET-14073-H,Amazon,ETP318,Grip Motor,,,1,Inventory,,checked,,,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,ETP234,Grip Motor Plate,,,1,Inventory,,,,,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,ETP235AMAZON,Torque Housing,,,1,Machine,,,,ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,ETP729,Torque Limiter,,,1,Inventory,,checked,,,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,ETP213,Float Coupler,,,1,Inventory,,checked,,,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Output Shaft,Output Shaft,,,1,Machine,,,,STEEL,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Drive Plate,Drive Plate,,,1,Machine,,,,ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Drive Plate Inboard,Drive Plate Inboard,,,1,Machine,,,,ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Reduction Box End,Reduction Box End,,,2,Machine,,,,ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Inspection Plate,Inspection Plate,,,2,Machine,,,,STAINLESS STEEL,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Inspection Plate Tube,Inspection Plate Tube,,,1,Machine,,,,McMaster - ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,60355K505,Reduction Box Bearing,,McMaster,4,Order,,,,,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Shaft Spacer half inch,Shaft Spacer half inch,,,3,Machine,,,,ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,6280K341,Reduction Box Small Sprocket,,McMaster,1,Order,,,MACHINE,Need to broach keyway***,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,6280K129,Reduction Box Big Sprocket,,McMaster,1,Order,,,MACHINE,Need to broach keyway***,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Short Rod,Acme Threaded Rod 5/8-10,,McMaster,1,Machine,,,,STEEL,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,rod,Acme Threaded Rod 5/8-10,,McMaster,1,Machine,,,,STEEL,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,6412K41,Coupler,,McMaster,1,Order,,,,,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,ACME Nut,ACME Nut,,,1,Machine,,,,STEEL,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Back Frame 014,Back Frame 014,,,1,Machine,,,,STEEL,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Back Frame 016,Back Frame 016,,,1,Machine,,,,ALUMINUM,$0.00 ,5-MOTOR ,
+ET-14073-H,Amazon,Back Frame 002,Back Frame 002,,,1,Machine,,,,ALUMINUM,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Back Frame 005,Back Frame 005,,,1,Machine,,,NOT READY,Need to finalize design,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Arm Frame 018,Arm Frame 018,,,2,Machine,,,NOT READY,Need to finalize design,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Arm Frame 019,Arm Frame 019,,,2,Machine,,,NOT READY,Need to finalize design,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Rail,Rail,,Ewellix,2,Order,,checked,,Amazon LLTHR 15-640.0 P5/E20,$84.32 ,10-FRAME PARTS,
+ET-14073-H,Amazon,ETP603,Bearing Blocks,,Ewellix,4,Inventory,,checked,,,$32.45 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Bearing Backing Plate,Bearing Backing Plate,,,4,Machine,,,,,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Back Frame 006,Back Frame 006,,,1,Machine,,,,,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Slide,Slide,,,4,Machine,,,,White Plastic,$0.00 ,10-FRAME PARTS,
+ET-14073-H,Amazon,Sensor,Sensor ** and connected parts **,,,4,Order,,,NOT READY,NOT READY,$0.00 ,10-FRAME PARTS,
+ET-14110-H,J&B Group,ET220118_A,"FRAME, UPPER SUPPORT",,,1,Machine,,,MTL IN HOUSE,,$0.00 ,1-FRAME WELDMENT,
+ET-14110-H,J&B Group,ET220118_B,"FRAME, VERTICAL SUPPORT",,,2,Machine,,,MTL IN HOUSE,,$0.00 ,1-FRAME WELDMENT,
+ET-14110-H,J&B Group,ET220118_C,"FRAME, CENTER SUPPORT",,,1,Machine,,,MTL IN HOUSE,,$0.00 ,1-FRAME WELDMENT,
+ET-14110-H,J&B Group,ET220118_D,"FRAME, LOWER SUPPORT",,,1,Machine,,,MTL IN HOUSE,,$0.00 ,1-FRAME WELDMENT,
+ET-14110-H,J&B Group,ET220118_E,"BLOCK, MOUNT, UPPER SLIDE",,,2,Machine,,,MTL IN HOUSE,,$0.00 ,2-FORK WELDMENT,
+ET-14110-H,J&B Group,ET220118_F,"FORK, VERTICAL MEMBER",,,2,Machine,,,MTL IN HOUSE,,$0.00 ,2-FORK WELDMENT,
+ET-14110-H,J&B Group,ET220118_G,"BLOCK, MOUNT, LOWER SLIDE",,,2,Machine,,,MTL IN HOUSE,,$0.00 ,2-FORK WELDMENT,
+ET-14110-H,J&B Group,ET220118_H,"FORK, LOWER MEMBER",,,2,Machine,,,MTL IN HOUSE,,$0.00 ,2-FORK WELDMENT,
+EH-14074-H,Advanced Airfoil ,Arm Plate,Arm Plate,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,2-ARM,
+EH-14074-H,Advanced Airfoil ,Arm001,Arm001,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,2-ARM,
+EH-14074-H,Advanced Airfoil ,Arm002,Arm002,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,2-ARM,
+EH-14074-H,Advanced Airfoil ,Arm003,Arm003,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,2-ARM,
+EH-14074-H,Advanced Airfoil ,ET211215F,ET211215F,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,2-ARM,
+EH-14074-H,Advanced Airfoil ,ET211215D,ET211215D,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,2-ARM,
+EH-14074-H,Advanced Airfoil ,EHP471ET211215,Custom Ergo Chief  Slewring Adapter,,,1,Inventory,,checked,,**Modify from existing part,$0.00 ,3-HEAD,
+EH-14074-H,Advanced Airfoil ,Limit Switch Mount,Limit Switch Mount,,,1,Machine,,checked,,,$0.00 ,3-HEAD,
+EH-14074-H,Advanced Airfoil ,Limit Switch Cam B,Limit Switch Cam B,,,1,Machine,,checked,,,$0.00 ,3-HEAD,
+EH-14074-H,Advanced Airfoil ,Limit Switch Cam A,Limit Switch Cam A,,,1,Machine,,checked,,,$0.00 ,3-HEAD,
+EH-14074-H,Advanced Airfoil ,ET211215N,ET211215N,,,1,Machine,,checked,,,$0.00 ,3-HEAD,
+EH-14074-H,Advanced Airfoil ,Limit Switches,Limit Switches,,Automation Direct,2,Order,,,Ordered,,$0.00 ,3-HEAD,
+EH-14074-H,Advanced Airfoil ,Shaft,Clasp Shaft,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,Spring Arm,Clasp Spring Arm,,,1,Machine,,checked,,STEEL-WELD,$0.00 ,4-CLASP,
+ET-14116-TK,Tesla,ET220504-E01,Back Plate,,,1,Machine,,,,Steel,$73.00 ,TESLA FORK,
+ET-14116-TK,Tesla,1/2-20 NUT,1/2-20 NUT,,,1,Machine,,,,Steel,$0.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET220504-A01,Fork Back Plate,,,1,Machine,,,,Steel,$66.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-A07,Fork Left Front Gusset,,,1,Machine,,,,Steel,$35.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-A06,Fork Right Front Gusset,,,1,Machine,,,,Steel,$35.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-A05,Fork Side Gusset,,,2,Machine,,,,Steel,$35.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-A04,Fork Tine Left,,,1,Machine,,,,Steel,$35.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-A03,Fork Tine Right,,,1,Machine,,,,Steel,$35.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-A02,Fork Support,,,1,Machine,,,,Steel,$0.00 ,TESLA FORK,
+ET-14116-TK,Tesla,PUSH13,Fork Back Rod,,,1,Machine,,,,Steel,$0.00 ,TESLA FORK,
+ET-14116-TK,Tesla,POWDERCOATING,GLOSS WHITE,,,1,Order,,,,,$0.00 ,TESLA FORK,
+ET-14116-TK,Tesla,ET210402-D02,Tesla Elevator Front Angle,,,1,Machine,,,,Aluminum,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ET210402-D01,Tesla Elevator Rear Angle,,,1,Machine,,,,Aluminum,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,6243T721,Grip Material,,McMaster,2,Order,,,,"*We might have enough... 4* 12.75""",$5.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ROFO005,Tesla Elevator Cam,,,4,Machine,,checked,,Aluminum,$50.00 ,ELEVATOR,checked
+ET-14116-TK,Tesla,EIP486,6831K110-Cam Follower,,,4,Inventory,,,,,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ET210402-D03,Tesla Elevator Rack Stringer,,,2,Machine,,,,Aluminum,$42.50 ,ELEVATOR,
+ET-14116-TK,Tesla,ET210402-D04,Tesla Elevator Radius Arm,,,2,Machine,,,,Aluminum,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ROFO011,Tesla Elevator Stop Blocks,,,2,Machine,,,,Plastic,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ET210402-D05,Tesla Elevator Latch Mount Left,,,1,Machine,,checked,,Aluminum,$90.00 ,ELEVATOR,checked
+ET-14116-TK,Tesla,ET210402-D06,Tesla Elevator Latch Mount Right,,,1,Machine,,checked,,Aluminum,$90.00 ,ELEVATOR,checked
+ET-14116-TK,Tesla,ET210402-D07,Tesla Elevator Latch Block,,,1,Machine,,checked,,Aluminum,$75.00 ,ELEVATOR,checked
+ET-14116-TK,Tesla,ROFO010,Tesla Elevator Latch Plate,,,1,Machine,,checked,,Aluminum,$75.00 ,ELEVATOR,checked
+ET-14116-TK,Tesla,ROFO009,Tesla Elevator Latch Tongue,,,1,Machine,,checked,,Aluminum,$75.00 ,ELEVATOR,checked
+ET-14116-TK,Tesla,ROFO008,Tesla Elevator Latch Pawl,,,1,Machine,,,,Aluminum,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ET210402-C06,Tesla Elevator Spacer Rod,,,1,Machine,,,,Aluminum,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,ETP845,Rubber Bumper,,,1,Inventory,,,,,$0.00 ,ELEVATOR,
+ET-14116-TK,Tesla,LA03,Tesla Fork Pin,,,1,Machine,,,,Steel,$0.00 ,FORK,
+ET-14116-TK,Tesla,ROFO013,Tesla Fork Radius Arm Mount,,,2,Machine,,,,Aluminum,$0.00 ,FORK,
+ET-14116-TK,Tesla,Tube Caps,Tube Caps,,McMaster,2,Order,,,,,$0.00 ,FORK,
+ET-14116-TK,Tesla,5872K25,Protective Cover,,McMaster,2,Order,,,,,$27.29 ,FORK,
+ET-14116-TK,Tesla,5872K26,Protective Cover 1.9,,McMaster,,Order,,,,,$30.36 ,FORK,
+ET-14116-TK,Tesla,Roller,2282T13 - Roller,,McMaster,4,Order,,,,,$11.99 ,FORK,
+ET-14116-TK,Tesla,Big Roller,2277T13 - Roller,,McMaster,1,Order,,,,,$17.51 ,FORK,
+ET-14116-TK,Tesla,ROFO016,Fork Latch Pivot,,,1,Machine,,checked,,Aluminum,$75.00 ,FORK,checked
+ET-14116-TK,Tesla,ROFO017,Fork Latch Spacer,,,1,Machine,,,,Aluminum,$0.00 ,FORK,
+ET-14116-TK,Tesla,ROFO018,Fork Latch Lever,,,1,Machine,,checked,,Aluminum,$75.00 ,FORK,checked
+ET-14116-TK,Tesla,ROFO015,Fork Latch Crossbar,,,1,Machine,,checked,,Aluminum,$50.00 ,FORK,checked
+ET-14116-TK,Tesla,ROFO014,Fork Latch Outer,,,2,Machine,,checked,,Aluminum,$100.00 ,FORK,checked
+ET-14116-TK,Tesla,PUSH31,Fork Side Blocks,,,2,Machine,,checked,,Aluminum,$60.00 ,FORK,checked
+ET-14116-TK,Tesla,PUSH14,Pin Support,,,2,Machine,,checked,,Aluminum,$75.00 ,FORK,checked
+ET-14116-TK,Tesla,ETP289,IGUS Bushings,,,2,Inventory,,,,**Wasn't ordered thru SAGE as part...,$0.00 ,FORK,
+ET-14116-TK,Tesla,PUSH25,Distal Arm Left Side,,,1,Machine,,,,Aluminum,$44.08 ,DISTAL ARM,
+ET-14116-TK,Tesla,PUSH26,Distal Arm Right Side,,,1,Machine,,,,Aluminum,$44.08 ,DISTAL ARM,
+ET-14116-TK,Tesla,PUSH27,Distal Arm Pivot Block,,,1,Machine,,checked,,Aluminum,$75.00 ,DISTAL ARM,checked
+ET-14116-TK,Tesla,PUSH35,Distal Arm Pivot Block Bushings,,,2,Machine,,,,Aluminum,$0.00 ,DISTAL ARM,
+ET-14116-TK,Tesla,PUSH28,Distal Arm Spacer,,,2,Machine,,checked,,Aluminum,$75.00 ,DISTAL ARM,checked
+ET-14116-TK,Tesla,PUSH33,Distal Arm Rod,,,1,Machine,,,,Aluminum,$0.00 ,DISTAL ARM,
+ET-14116-TK,Tesla,PUSH29,Distal Arm Latch Stop,,,1,Machine,,,,White Plastic,$0.00 ,DISTAL ARM,
+ET-14116-TK,Tesla,PUSH30,Distal Arm Axle Cap,,,2,Machine,,checked,,Aluminum,$60.00 ,DISTAL ARM,checked
+ET-14116-TK,Tesla,2781T71,Distal Arm Rollers,,McMaster,4,Order,,,,,$1.00 ,DISTAL ARM,
+ET-14116-TK,Tesla,ETP289,IGUS Bushings,,,2,Inventory,,,,,$0.00 ,DISTAL ARM,
+ET-14116-TK,Tesla,PUSH21,Control Arm Pivot Block,,,2,Machine,,checked,,Aluminum,$75.00 ,CONTROL ARM,checked
+ET-14116-TK,Tesla,PUSH20,Control Arm Spacer,,,1,Machine,,checked,,Aluminum,$75.00 ,CONTROL ARM,checked
+ET-14116-TK,Tesla,PUSH36,Control Arm Pivot Pin B,,,1,Machine,,,,Steel,$0.00 ,CONTROL ARM,
+ET-14116-TK,Tesla,PUSH37,Control Arm Pivot Pin A,,,1,Machine,,,,Steel,$0.00 ,CONTROL ARM,
+ET-14116-TK,Tesla,ROFO022,Motor Assembly Pivot Block A,,,1,Machine,,checked,,Aluminum,$100.00 ,CONTROL ARM,checked
+ET-14116-TK,Tesla,ROFO021,Motor Assembly Pivot Block B,,,1,Machine,,checked,,Aluminum,$90.00 ,CONTROL ARM,checked
+ET-14116-TK,Tesla,M1-D024-0100-A06-LN,Push Off Actuator,SO20828226,ZORO,1,Order,,checked,[Remove],PAID IN FULL 2/27/22. DB,$0.00 ,CONTROL ARM,
+ET-14116-TK,Tesla,ET210402-C04,Control Arm Left,,,1,Machine,,,,Aluminum,$41.50 ,CONTROL ARM,
+ET-14116-TK,Tesla,ET210402-C05,Control Arm Right,,,1,Machine,,,,Aluminum,$41.50 ,CONTROL ARM,
+ET-14116-TK,Tesla,ETP289,IGUS Bushings,,,2,Inventory,,,,,$0.00 ,CONTROL ARM,
+ET-14116-TK,Tesla,PUSH34,Control Arm Rod,,,1,Machine,,,,Aluminum,$0.00 ,CONTROL ARM,
+ET-14116-TK,Tesla,PUSH24,Proximal Arm Spacer,,,2,Machine,,checked,,Aluminum,$75.00 ,PROXIMAL ARM,checked
+ET-14116-TK,Tesla,ET210402-C01,Proximal Arm Left,,,1,Machine,,,,Aluminum,$41.43 ,PROXIMAL ARM,
+ET-14116-TK,Tesla,ET210402-C02,Proximal Arm Right,,,1,Machine,,,,Aluminum,$41.43 ,PROXIMAL ARM,
+ET-14116-TK,Tesla,PUSH38,Proximal Arm Pivot Pin,,,1,Machine,,,,Steel,$0.00 ,PROXIMAL ARM,
+ET-14116-TK,Tesla,ETP289,IGUS Bushings,,,4,Inventory,,,,,$0.00 ,PROXIMAL ARM,
+ET-14116-TK,Tesla,ETP398,Panel  Connector 4282-4SG-300,,,1,Inventory,,,,,$0.00 ,FORK,
+ET-14116-TK,Tesla,ETP399,Cable End  Connect.3282-4PG-3X,,,1,Inventory,,,,,$0.00 ,FORK,
+ET-14116-TK,Tesla,ETP998,Heavy Retract Power Cord-4/C,,,1,Inventory,,,,,$0.00 ,FORK,
+ET-14116-TK,Tesla,3114T66,Latch Spring,,McMaster,1,Order,,,,,$1.00 ,FORK,
+ET-14116-TK,Tesla,98837A031,"3/8""-16 Tie Rod",,McMaster,1,Order,,,,,$3.00 ,FORK,
+ET-14116-TK,Tesla,7432K63,UV-Resistant Spiral Sleeving (TIE-ROD PROTECTOR) 10 FT,,McMaster,1,Order,,,,**10 ft length,$7.00 ,FORK,
+ET-210204,John Deere,JD010,"CHANNEL, TOP MOUNT",,,1,Machine,,,,Steel,$0.00 ,1 - FRAME MOUNT,
+ET-210204,John Deere,JD014,"GUSSET, MOUNT",,,2,Machine,,,,Steel,$0.00 ,1 - FRAME MOUNT,
+ET-210204,John Deere,JD016,"CHANNEL, VERTICAL MOUNT",,,1,Machine,,,,Steel,$0.00 ,1 - FRAME MOUNT,
+ET-210204,John Deere,JD020,"CHANNEL, BOTTOM MOUNT",,,1,Machine,,,,Steel,$0.00 ,1 - FRAME MOUNT,
+ET-210204,John Deere,JD012,"ROD, PIN",,,1,Machine,,,,Steel,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD013,"PLATE, PIN MOUNT",,,1,Machine,,,,Steel,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD001,"PLATE, MOUNT, BOTTOM",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD002,"PLATE, GRIPPER, SWING ARM, UPPER",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD003,"SPACER, MOVABLE JAW",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD004,"PLATE, MOUNT, TOP",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD005,"PLATE, GRIPPER, SWING ARM, LOWER",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD006,"PLATE, GRIPPER, FIXED ARM, UPPER",,,2,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD007,"BLOCK, SPACER",,,1,Machine,,checked,,6061-T6,$0.00 ,2 - GRIP,checked
+ET-210204,John Deere,JD008,"SPACER, RIGHT GRIPPER",,,1,Machine,,checked,,6061-T6,$0.00 ,2 - GRIP,checked
+ET-210204,John Deere,JD009,"PLATE, MOUNT, TOP",,,1,Machine,,checked,,6061-T6,$0.00 ,2 - GRIP,checked
+ET-210204,John Deere,JD015,"JAW, GRIPPER",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD017,"ROD, SHAFT",,,2,Machine,,,,Steel,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD018,"JAW, GRIPPER",,,1,Machine,,,,6061-T6,$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD019,"PLATE, MOUNT, BOTTOM",,,1,Machine,,checked,,6061-T6,$0.00 ,2 - GRIP,checked
+ET-210204,John Deere,JD021,"PIN, SHAFT",,,1,Machine,,,,"Steel
+",$0.00 ,2 - GRIP,
+ET-210204,John Deere,JD022,"PIN, SHAFT",,,1,Machine,,,,Steel,$0.00 ,2 - GRIP,
+ET-14100-H,Advanced Airfoil ,ET220416A,BACK PLATE,,,1,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+EH-14074-H,Advanced Airfoil ,ET211215E,Clasp Back Plate,,,1,Machine,,checked,,STEEL,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,Wedge,Clasp Wedge Left,,,1,Machine,,checked,,STEEL ,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,Wedge Spring Side,Clasp Wedge Right,,,1,Machine,,checked,,STEEL,$0.00 ,4-CLASP,
+ET-14100-H,Advanced Airfoil ,ET220146B,SLIDE BLOCK,,,1,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+EH-14074-H,Advanced Airfoil ,ET211215P,Clasp Hook,,,2,Machine,,checked,,STEEL,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,ET211215C,Clasp Hook Rod,,,1,Machine,,checked,,STEEL,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,ET211215A,Clasp Pivot Block,,,1,Machine,,checked,,ALUMINUM,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,ET211215B,Clasp Push Link,,,1,Machine,,checked,,ALUMINUM,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,375PIN,Clasp Pin,,McMaster,4,Order,,checked,,,$0.00 ,4-CLASP,
+EH-14074-H,Advanced Airfoil ,MFI_1214_12_1,IGUS Bushings,,IGUS,2,Order,,checked,,,$0.00 ,4-CLASP,
+ET-14100-H,Advanced Airfoil ,ET220146B,"SLIDE BLOCK, LOCKABLE",,,1,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14100-H,Advanced Airfoil ,ET220146C,FORK ROD,,,2,Machine,,,,STAINLESS STEEL,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14100-H,Advanced Airfoil ,ET220146D,LOCK COLLAR,,,2,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14100-H,Advanced Airfoil ,ET220146E,LOCKING BLOCK,,,1,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14100-H,Advanced Airfoil ,ET220146F,SLIDING ROD HOLDER,,,2,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14100-H,Advanced Airfoil ,ET220146G,SLIDING ROD WITH LOCK NOTCHES,,,1,Machine,,,,STAINLESS STEEL,$0.00 ,1-ADJUSTABLE FORKS,
+EH-14074-H,Advanced Airfoil ,6303K57,Lever Handle,,McMaster,1,Order,,checked,,,$0.00 ,4-CLASP,
+ET-14100-H,Advanced Airfoil ,ET220146G,SLIDING ROD,,,1,Machine,,,,STAINLESS STEEL,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14100-H,Advanced Airfoil ,ET220146H,TURN MOUNT,,,2,Machine,,,,6061-T6,$0.00 ,1-ADJUSTABLE FORKS,
+EH-14074-H,Advanced Airfoil ,1832K21,Extension Spring,,McMaster,1,Order,,checked,,,$0.00 ,4-CLASP,
+ET-14100-H,Advanced Airfoil ,ET220146J,NEOPRENE PADDING,,,3,Order,,,,NEOPRENE,$0.00 ,1-ADJUSTABLE FORKS,
+ET-14073-H,Amazon,Frame Assembly 104,Frame Assembly 104,,,1,Print,,checked,,,$0.00 ,10-FRAME PARTS,
+ET-14121-H,Keysight,ET220516-F01,Fork Assembly Back,,,1,Machine,,checked,,Steel,$0.00 ,1 - FORK WELDMENT,
+ET-14121-H,Keysight,ET220516-F02,Fork Assembly Cross Bar,,,1,Machine,,checked,,Steel,$0.00 ,1 - FORK WELDMENT,
+ET-14121-H,Keysight,ET220516-F03,Fork Assembly Tine,,,2,Machine,,checked,,Steel,$0.00 ,1 - FORK WELDMENT,
+ET-14121-H,Keysight,FORK-ET220516,FORK-ET220516,,,1,Order,,checked,,,$0.00 ,1 - FORK WELDMENT,
+ET-14202-H,Wheeler,ET210706 Turn Shaft,ET210706 Turn Shaft,,,2,Machine,,checked,,STEEL,$0.00 ,1-TURN,
+ET-14202-H,Wheeler,HYDCYL006_Rev_C,Turn Shaft Support,,,2,Machine,,checked,,STEEL,$0.00 ,2-GRIP,
+ET-210204,John Deere,JD102,Weldment,,Dan Kuntz,1,Order,,,,,$0.00 ,2 - GRIP,
+ET-210204,John Deere,6338K418,Oil-Embedded Flanged Sleeve Bearings,,McMaster-Carr,2,Order,,,,,$2.24 ,2 - GRIP,
+ET-210204,John Deere,6338K438,Oil-Embedded Flanged Sleeve Bearings,,McMaster-Carr,2,Order,,,,,$9.88 ,2 - GRIP,
+ET-210204,John Deere,98320A525,Ring-Grip Quick-Release Pins,,McMaster-Carr,1,Order,,,,,$3.28 ,2 - GRIP,
+ET-210204,John Deere,ETP289,,,,2,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP818,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP832,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP843,,,,2,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP876,,,,4,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP318,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,SGL013,,,,1,Machine,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP234,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP235,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP729,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP213,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP269,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP221,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP210,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP215,,,,1,Inventory,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ACME SHAFT,,,,1,Machine,,,,,$0.00 ,3 - MOTOR ASSM,
+ET-210204,John Deere,ETP822,,,,2,Inventory,,,,,$0.00 ,4 - PROXIMAL LINK,
+ET-210204,John Deere,ETP831,,,,2,Inventory,,,,,$0.00 ,4 - PROXIMAL LINK,
+ET-14203-H,Sharp,Frame Weldment,"Frame Weldment, Modification",,,1,Repair,,,,Stainless,,1-Frame,
+ET-14203-H,Sharp,ET220704D,Lifting Lug,,,2,Machine,,,,Stainless,,1-Frame,
+ET-14203-H,Sharp,"Fork Weldment, Left/Right","Fork Weldment, Left/right",,,2,Order,,,,Strainless,,2-Fork,
+ET-14203-H,Sharp,ET220201B,Mounting Plate Fork,,,2,Machine,,,,Stainless,,2-Fork,
+ET-14203-H,Sharp,ET220201A,Fork,,,2,Machine,,,,Stainless,,2-Fork,
+ET-14203-H,Sharp,ET220201K,Wear Plate,,,2,Machine,,,,HDPE,,2-Fork,
+ET-14203-H,Sharp,"Weldment, Center Rod","Weldment, Center Rod",,,1,Order,,,,Stainless,,3-Center Rod,
+ET-14203-H,Sharp,ET220704B,Solid Rod,,,1,Machine,,,,Stainless,,3-Center Rod,
+ET-14203-H,Sharp,ET220704C,Center Plate,,,1,Machine,,,,Stainless,,3-Center Rod,
+ET-14203-H,Sharp,8834T225,Tie Down Strap,,McMaster-Carr,1,Order,,,,Nylon,$36.92 ,1-Frame,
+ET-14137-K,Upstate,ET220310-10,"PLATE, DOOR, FRONT",,,1,Machine,,,,6061-T6,,2-Frame Assembly,
+ET-14137-K,Upstate,ET220310-11,"PLATE, SIDE, FIXED, LEFT",,,1,Machine,,,,6061-T6,,2-Frame Assembly,
+ET-14137-K,Upstate,ET220310-13,"PLATE, DOOR, RIGHT",,,1,Machine,,,,6061-T6,,2-Frame Assembly,
+ET-14137-K,Upstate,ET220310-12,"BLOCK, PIN",,,1,Machine,,,,6061-T6,,2-Frame Assembly,
+ET-14137-K,Upstate,ET220310-WELDMENT-1,"TUBE, RECTANGULAR 2 X 1 X 0.12 X 28.82",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-2,"TUBE, RECTANGULAR 2 X 1 X 0.12 X 19",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-3,"TUBE, RECTANGULAR 2 X 1 X 20",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-4,"TUBE, RECTANGULAR 2 X 1 X 0.12 X 17",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-5,"TUBE, RECTANGULAR 2 X 1 X 0.12 X  9.76",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-6,"TUBE, RECTANGULAR 2 X 1 X 0.12 X  21",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-7,"TUBE, RECTANGULAR 2 X 1 X 0.12 X  28.82",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-8,"TUBE, RECTANGULAR 2 X 1 X 0.12 X  10.04",,,2,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-9,"TUBE, SQUARE 1 X 1 X 0.12 X 11.61",,,2,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-WELDMENT-10,"ROD, 0.50 DIA X 3.25",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14137-K,Upstate,ET220310-06,"PLATE, HINGE FIXED",,,2,Machine,,,,Steel,,3-Pusher,
+ET-14137-K,Upstate,ET220310-07,"TUBE, ARM, ACTUATOR",,,1,Machine,,,,Steel,,3-Pusher,
+ET-14137-K,Upstate,ET220310-16,"ROUND, PUSHER",,,1,Machine,,,,UHMW,,3-Pusher,
+ET-14137-K,Upstate,ET220310-RF50U-2,RF50U-2-MODIFIED,,,4,Machine,,,,,,3-Pusher,
+ET-14137-K,Upstate,ET220310-WELDMENT-11,"PLATE, 1.25 X 0.25 X 4",,,1,Machine,,,,Steel,,1-Frame Weldment,
+ET-14217-TK,Repligen,ET220701-12,COUNTER WEIGHT,,,2,Machine,,,,Steel,,1-Modified ET,
+ET-14217-TK,Repligen,ET220701-09,"BASE PLATE, WIDE, ET",,Die-Verse Tool & Mfg.,1,Order,,,,6061-T6,,1-Modified ET,
+ET-14137-K,Upstate,ET220310-03,"PLATE, MOUNTING, PLATFORM",,,1,Machine,,,,6061-T6,,2-Frame Assembly,
+ET-14137-K,Upstate,ET220310-01,"PLATE, MOUNTING, PLATFORM",,,1,Machine,,,,6061-T6,,2-Frame Assembly,
+ET-14137-K,Upstate,ET220310-WELDMENT,,,Dan Kuntz,1,Order,,,,,,,
+ET-14137-K,Upstate,ET220310-08,"PIN, CLEVIS, HEADLESS",,,1,Machine,,,,Steel,,3-Pusher,
+ET-14217-TK,Repligen,ET220701-10,"PLATE, FRONT STIFFENER, ET",,Die-Verse Tool & Mfg.,1,Order,,,,6061-T6,,1-Modified ET,
+ET-14217-TK,Repligen,ET220701-13,"LEG, EXTENDED",,,2,Machine,,,,6061-T6,,1-Modified ET,
+ET-14217-TK,Repligen,ET220701-19,"PLATE, GUSSET",,,2,Machine,,,,6061-T6,,1-Modified ET,
+ET-14217-TK,Repligen,ET220701-11,CONTROL BAR,,LAMPLE STAMPING,1,Order,,,,Stainless,,1-Modified ET,
+ET-14217-TK,Repligen,ET220701-101,"END EFFECTOR, FORK, REPLIGEN",,Dan Kuntz,1,Order,,,,,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-01,UPRIGHT FORK,,,1,Machine,,,,Stainless,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-02,"TUBE, 1 x 2 x 0.12 x 69",,,1,Machine,,,,Stainless,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-03,"TUBE, 1 x 2 x 0.12 x 20",,,2,Machine,,,,Stainless,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-04,"TUBE, 1 x 2 x 0.12 x 32.5",,,2,Machine,,,,Stainless,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-05,"PLATE, GUSSET",,,2,Machine,,,,Stainless,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-06,"PLATE, ADAPTER",,,2,Machine,,,,Stainless,,2-End Effector,
+ET-14217-TK,Repligen,ET220701-07,"TUBE, 1 x 2 x 0.12 x 24",,,2,Machine,,,,Stainless,,2-End Effector,
