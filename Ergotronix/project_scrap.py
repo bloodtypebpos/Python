@@ -1,100 +1,193 @@
 import sqlite3
-import openpyxl
 import os
-import datetime
-import texttable
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+from airtable_project import Project
 import matplotlib.pyplot as plt
-from airtable import Airtable
+import math
+import requests
 
+page_width = 300 * 8
+page_height = int(300 * 10.5)
 
-dbdir = r'C:\Users\Matt Tigrett\Desktop'
-
+sonum = 'EI-13946-TK'
+table = 'airtable'
+base_key = "appW9SUX8ihLsY2YV"
+api_key = "keyszzdobucJcnVXx"
+dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports'
+imdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports\imdir'
 fname = os.path.join(dbdir, 'airtabledata.db')
-
 conn = sqlite3.connect(fname)
 c = conn.cursor()
 
-query = 'SELECT * FROM airtabledata'
+projects_total = Project(base_key, api_key, conn, table, "NA")
+project = Project(base_key, api_key, conn, table, sonum)
+code_stats_total = [project.code_stats_total[i] for i in project.moi]
+code_stats_complete = [project.code_stats_complete[i] for i in project.moi]
+moi_codes = project.moi_codes
 
-crows = c.execute(query)
-rows = []
-for row in crows:
-    rows.append(row)
+####################################################################
+#      BELOW GETS THE BARS AND TICKS FOR THE MOI FIELDS            #
+####################################################################
+code_colors = ['red', 'blue', 'green']
+code_colors_completed = ['pink', 'cyan', 'lime']
+max_rows = max(code_stats_total)
+margin_val = 25
+img_height = int(page_height / 3)
+row_height = int((img_height - 2 * margin_val) / max_rows)
+row_width = int((page_width - 4 * margin_val) / len(project.moi))
+img = Image.new("RGBA", (page_width, img_height + 100), color="white")
+img_draw = ImageDraw.Draw(img)
+font_path = r'C:\Windows\Fonts\calibrib.ttf'
+font = ImageFont.truetype(font_path, 50)
 
-allofit = len(rows)
-codevals = []
-codecomps = []
+tick_width = int(((page_width - 2 * margin_val) / projects_total.code_stats_total[-1]) / 2)
+offset = int(((page_width - 2 * margin_val) - tick_width * 2 * projects_total.code_stats_total[-1]) / 2)
 
-query = 'SELECT DISTINCT CODE FROM airtabledata'
-crows = c.execute(query)
-codes = []
-for row in crows:
-    codes.append(row[0])
+for i in range(0, len(project.moi)):
+    comp_val = code_stats_complete[i]
+    code = moi_codes[i]
+    for j in range(0, code_stats_total[i]):
+        fill_color = 'white'
+        if comp_val > 0:
+            fill_color = code_colors_completed[i]
+            comp_val = comp_val - 1
+        shape = [(margin_val + i * margin_val + i * row_width,
+                  img_height - (margin_val + j * row_height)),
+                 (margin_val + i * margin_val + i * row_width + row_width,
+                  img_height - (margin_val + (j + 1) * row_height))]
+        img_draw.rectangle(shape, fill=fill_color, outline=code_colors[i])
+    try:
+        p_val = round(100 * (code_stats_complete[i] / code_stats_total[i]), 2)
+        code_str = (code + ":  (" +
+                    str(code_stats_complete[i]) + "/" +
+                    str(code_stats_total[i]) + ")  " +
+                    str(p_val) + "% COMPLETE")
+        img_draw.text((margin_val + i * margin_val + i * row_width,
+                       img_height - (margin_val + (code_stats_total[i]) * row_height)),
+                      code_str,
+                      (0, 0, 0),
+                      font=font)
+    except:
+        pass
+
+full_val = projects_total.code_stats_total[-1]
+comp_val = projects_total.code_stats_complete[-1]
+lval = comp_val - project.code_stats_complete[-1]
+rval = lval + project.code_stats_total[-1]
+for i in range(0, full_val):
+    color = 'green'
+    tick_height = 50
+    if i < comp_val:
+        color = 'green'
+    else:
+        color = 'red'
+    if lval < i < rval:
+        tick_height = 70
+    else:
+        tick_height = 35
+    if i % 100 == 0:
+        tick_height = tick_height - 10
+    shape = [(offset + margin_val + 2 * i * tick_width,
+              img_height + margin_val),
+             (offset + margin_val + 2 * i * tick_width + tick_width,
+              img_height + margin_val + tick_height)]
+    img_draw.rectangle(shape, fill=color)
+fname = os.path.join(imdir, 'moi.png')
+img.save(fname)
+
+####################################################################
+#             BELOW GETS THE COST VISUALIZATIONS                   #
+####################################################################
+
+sub_costs = []
+sub_labels = []
+sub_counts = []
+sub_labels_counts = []
+sub_nums = []
+for subassembly in project.subassemblies:
+    if 'image' in getattr(subassembly[0], 'Sub Assembly').lower():
+        pass
+    else:
+        val = 0
+        num = 0
+        for item in subassembly:
+            val = val + (item.Price * item.Qty)
+            num = num + item.Qty
+        sub_costs.append(round(val, 2))
+        sub_labels.append((getattr(subassembly[0], 'Sub Assembly').split('-')[1]) + ": $" + str(round(val, 2)))
+        sub_counts.append(len(subassembly))
+        sub_nums.append(num)
+        sub_labels_counts.append((getattr(subassembly[0], 'Sub Assembly').split('-')[1]) +
+                                 " #Items: " + str(len(subassembly)) +
+                                 " #Parts: " + str(num)
+                                 )
+
+fig, ax = plt.subplots(frameon=False, figsize=(16, 10))
+plt.gca().set_aspect('equal', adjustable='box')
+plt.tight_layout()
+plt.margins(x=0, y=0)
+plt.axis('off')
+plt.pie(sub_costs, labels=sub_labels, startangle=90)
+plt.legend(title="Sub Assemblies:")
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1.25, 1.5)
+plt.text(-1, 1.4, project.customer)
+plt.text(-1, 1.35, project.sonum)
+plt.text(-1, 1.3, "Project Cost Total: $" + str(sum(sub_costs)))
+fname = os.path.join(imdir, 'sub1.png')
+plt.savefig(fname)
+plt.cla()
 
 
 
+fig, ax = plt.subplots(frameon=False, figsize=(16, 10))
+plt.gca().set_aspect('equal', adjustable='box')
+plt.tight_layout()
+plt.margins(x=0, y=0)
+plt.axis('off')
+plt.pie(sub_counts, labels=sub_labels_counts, startangle=90)
 
-for code in codes:
-    query = 'SELECT * FROM airtabledata WHERE CODE = "' + code +'"'
-    crows = c.execute(query)
-    rows = []
-    for row in crows:
-        rows.append(row)
-    total = len(rows)
-    completes = []
-    query = 'SELECT * FROM airtabledata WHERE CODE IS "' + code +'" AND COMPLETE IS NOT NULL'
-    crows = c.execute(query)
-    for row in crows:
-        completes.append(row)
-    completed = len(completes)
-    codevals.append(total)
-    codecomps.append(completed)
+circle1 = plt.Circle((0, 0), 0.75, fill=False, edgecolor='black')
+circle2 = plt.Circle((0, 0), 1, fill=False, edgecolor='black')
+circle3 = plt.Circle((0, 0), 0.5, fill=False, edgecolor='black')
+ax.add_patch(circle1)
+ax.add_patch(circle2)
+ax.add_patch(circle3)
 
 
-tcomp = 0
-
-
-for i in range(0, len(codes)):
-    code = codes[i]
-    print(code)
-    tcomp = tcomp + codecomps[i]
-    pcomp = round(codecomps[i]/codevals[i], 2)
-    print(codevals[i])
-    print(codecomps[i])
-    pcomp = pcomp*100
-    print(str(pcomp) + "%")
-    print("--------------------------------------------------")
-
-print("=========================================================")
-print("TOTAL: " + str(allofit))
-print("COMPLETED: " + str(tcomp))
-ccomp = round(tcomp/allofit, 2)
-ccomp = ccomp*100
-print(str(ccomp) + "%")
-
-
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-query = 'SELECT QTY FROM airtabledata WHERE CODE = "Machine"'
-crows = c.execute(query)
-rows = []
-for row in crows:
-    rows.append(row[0])
-
+theta = 0
 val = 0
-for row in rows:
-    val = val + int(row)
+num = 0
+r = 1
+endval = sum(sub_nums)
+d_theta = 360/endval
+for i in range(0, len(sub_counts)):
+    for j in range(0, sub_nums[i]):
+        x = [(r-0.25)*math.sin(math.radians(theta)), r*math.sin(math.radians(theta))]
+        y = [(r-0.25)*math.cos(math.radians(theta)), r*math.cos(math.radians(theta))]
+        plt.plot(x, y, color='black')
+        theta = theta + d_theta
 
-print(val)
+theta = 0
+for i in range(0, len(project.subassemblies)):
+    subassembly = project.subassemblies[i]
+    print(len(subassembly))
+    for item in subassembly:
+        x = [(r-0.5)*math.sin(math.radians(theta)), (r-0.25)*math.sin(math.radians(theta))]
+        y = [(r-0.5)*math.cos(math.radians(theta)), (r-0.25)*math.cos(math.radians(theta))]
+        plt.plot(x, y, color='black')
+        theta = theta + (d_theta*item.Qty)
 
-query = 'SELECT QTY FROM airtabledata WHERE CODE = "Machine" AND COMPLETE = "checked"'
-crows = c.execute(query)
-rows = []
-for row in crows:
-    rows.append(row[0])
-
-val = 0
-for row in rows:
-    val = val + int(row)
-
-print(val)
+plt.legend(title="Sub Assemblies:")
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1.25, 1.5)
+plt.text(-1, 1.4, project.customer)
+plt.text(-1, 1.35, project.sonum)
+plt.text(-1, 1.3, "Project Items Total: " + str(sum(sub_counts)))
+plt.text(-1, 1.25, "Project Parts Total: " + str(sum(sub_nums)))
+fname = os.path.join(imdir, 'sub2.png')
+plt.savefig(fname)
+plt.show()
+plt.cla()
