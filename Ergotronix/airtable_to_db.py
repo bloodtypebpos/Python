@@ -118,8 +118,3 @@ for record in records:
 table_name = 'airtable'
 make_air_table(fields, table_name, ints, floats, ignores)
 fill_air_table(fields, table_name, recs, ints, floats, ignores)
-
-
-
-
-
