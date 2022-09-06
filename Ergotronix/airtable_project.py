@@ -1,8 +1,3 @@
-import sqlite3
-import os
-from airtable import Airtable
-
-
 class Project:
     def __init__(self, base_key, api_key, conn, table, sonum):
         self.base_key = base_key
@@ -41,13 +36,21 @@ class Project:
         self.codes = self.get_rows(query)
         self.code_items = []
         self.completed_code_items = []
+        self.code_stats_total = []
+        self.code_stats_complete = []
+        self.customer = 'Ergotronix'
         for code in self.codes:
             rows, complete_rows = self.get_codes(self.items, code[0])
             self.code_items.append(rows)
+            self.code_stats_total.append(len(rows))
             self.completed_code_items.append(complete_rows)
-        query = 'SELECT DISTINCT Customer FROM "' + table + '"'
-        rows = self.get_rows(query)
-        self.customer = rows[0][0]
+            self.code_stats_complete.append(len(complete_rows))
+        if self.sonum == "NA":
+            pass
+        else:
+            query = 'SELECT DISTINCT Customer FROM "' + table + '" WHERE "Reference No" IS "' + sonum + '"'
+            rows = self.get_rows(query)
+            self.customer = rows[0][0]
         self.image_url = "NA"
         if self.sonum == "NA":
             pass
@@ -55,6 +58,32 @@ class Project:
             query = 'SELECT Attachments FROM "' + table + '" WHERE "Reference No" = "' + sonum + '" AND "Code" = "Image"'
             rows = self.get_rows(query)
             self.image_url = rows[0][0]
+        self.moi = []
+        self.moi_codes = ['Machine', 'Order', 'Inventory']
+        for code in self.moi_codes:
+            for i in range(0, len(self.codes)):
+                if code == self.codes[i][0]:
+                    self.moi.append(i)
+                    break
+        self.code_stats_total.append(sum(self.code_stats_total[i] for i in self.moi))
+        self.code_stats_complete.append(sum(self.code_stats_complete[i] for i in self.moi))
+        self.subassemblies_names = ["NA"]
+        if self.sonum == 'NA':
+            pass
+        else:
+            query = query = 'SELECT DISTINCT "Sub Assembly" FROM "' + table + '" WHERE "Reference No" = "' + sonum + '"'
+            rows = self.get_rows(query)
+            self.subassemblies_names = []
+            for row in rows:
+                self.subassemblies_names.append(row[0])
+        if sonum == "NA":
+            pass
+        else:
+            self.subassemblies = self.get_subassemblies(self.items, self.subassemblies_names)
+
+
+
+
 
     def get_rows(self, query):
         rows = []
@@ -80,6 +109,17 @@ class Project:
                 if str(item.Complete) == "1":
                     complete_rows.append(item)
         return rows, complete_rows
+
+    def get_subassemblies(self, items, subassemblies_names):
+        subassemblies = []
+        for subassembly in subassemblies_names:
+            rows = []
+            for item in items:
+                if getattr(item, 'Sub Assembly') == subassembly:
+                    rows.append(item)
+            subassemblies.append(rows)
+        return subassemblies
+
 
 
 class Item:
