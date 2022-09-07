@@ -15,8 +15,8 @@ sonum = 'EI-13946-TK'
 table = 'airtable'
 base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
-dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports'
-imdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports\imdir'
+dbdir = r'F:\PYTHON SCRIPTS\Support Files'
+imdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files'
 fname = os.path.join(dbdir, 'airtabledata.db')
 conn = sqlite3.connect(fname)
 c = conn.cursor()
@@ -106,6 +106,7 @@ sub_labels = []
 sub_counts = []
 sub_labels_counts = []
 sub_nums = []
+sub_qty = []
 for subassembly in project.subassemblies:
     if 'image' in getattr(subassembly[0], 'Sub Assembly').lower():
         pass
@@ -113,6 +114,7 @@ for subassembly in project.subassemblies:
         val = 0
         num = 0
         for item in subassembly:
+            sub_qty.append(item.Qty)
             val = val + (item.Price * item.Qty)
             num = num + item.Qty
         sub_costs.append(round(val, 2))
@@ -124,12 +126,12 @@ for subassembly in project.subassemblies:
                                  " #Parts: " + str(num)
                                  )
 
-fig, ax = plt.subplots(frameon=False, figsize=(16, 10))
+fig, ax = plt.subplots(frameon=False, figsize=(16, 10), facecolor='white')
 plt.gca().set_aspect('equal', adjustable='box')
 plt.tight_layout()
 plt.margins(x=0, y=0)
 plt.axis('off')
-plt.pie(sub_costs, labels=sub_labels, startangle=90)
+plt.pie(sub_costs, labels=sub_labels, startangle=90, counterclock=False)
 plt.legend(title="Sub Assemblies:")
 ax.set_xlim(-1, 1)
 ax.set_ylim(-1.25, 1.5)
@@ -140,14 +142,15 @@ fname = os.path.join(imdir, 'sub1.png')
 plt.savefig(fname)
 plt.cla()
 
+####################################################################
 
-
-fig, ax = plt.subplots(frameon=False, figsize=(16, 10))
+fig, ax = plt.subplots(frameon=False, figsize=(16, 10), facecolor='white')
 plt.gca().set_aspect('equal', adjustable='box')
 plt.tight_layout()
 plt.margins(x=0, y=0)
 plt.axis('off')
-plt.pie(sub_counts, labels=sub_labels_counts, startangle=90)
+
+plt.pie(sub_nums, labels=sub_labels_counts, startangle=90, counterclock=False)
 
 circle1 = plt.Circle((0, 0), 0.75, fill=False, edgecolor='black')
 circle2 = plt.Circle((0, 0), 1, fill=False, edgecolor='black')
@@ -156,29 +159,33 @@ ax.add_patch(circle1)
 ax.add_patch(circle2)
 ax.add_patch(circle3)
 
-
 theta = 0
 val = 0
 num = 0
 r = 1
+n = 0
 endval = sum(sub_nums)
-d_theta = 360/endval
+d_theta = 360 / endval
+
 for i in range(0, len(sub_counts)):
     for j in range(0, sub_nums[i]):
-        x = [(r-0.25)*math.sin(math.radians(theta)), r*math.sin(math.radians(theta))]
-        y = [(r-0.25)*math.cos(math.radians(theta)), r*math.cos(math.radians(theta))]
-        plt.plot(x, y, color='black')
+        x = [(r - 0.25) * math.sin(math.radians(theta)), r * math.sin(math.radians(theta))]
+        y = [(r - 0.25) * math.cos(math.radians(theta)), r * math.cos(math.radians(theta))]
+        if n % 25 == 0:
+            plt.plot(x, y, color='red')
+        else:
+            plt.plot(x, y, color='black')
         theta = theta + d_theta
+        n = n + 1
 
 theta = 0
-for i in range(0, len(project.subassemblies)):
-    subassembly = project.subassemblies[i]
-    print(len(subassembly))
-    for item in subassembly:
-        x = [(r-0.5)*math.sin(math.radians(theta)), (r-0.25)*math.sin(math.radians(theta))]
-        y = [(r-0.5)*math.cos(math.radians(theta)), (r-0.25)*math.cos(math.radians(theta))]
-        plt.plot(x, y, color='black')
-        theta = theta + (d_theta*item.Qty)
+n = 0
+
+for i in range(0, len(sub_qty)):
+    x = [(r - 0.5) * math.sin(math.radians(theta)), (r - 0.25) * math.sin(math.radians(theta))]
+    y = [(r - 0.5) * math.cos(math.radians(theta)), (r - 0.25) * math.cos(math.radians(theta))]
+    theta = theta + d_theta * sub_qty[i]
+    plt.plot(x, y, color='black')
 
 plt.legend(title="Sub Assemblies:")
 ax.set_xlim(-1, 1)
@@ -188,6 +195,6 @@ plt.text(-1, 1.35, project.sonum)
 plt.text(-1, 1.3, "Project Items Total: " + str(sum(sub_counts)))
 plt.text(-1, 1.25, "Project Parts Total: " + str(sum(sub_nums)))
 fname = os.path.join(imdir, 'sub2.png')
-plt.savefig(fname)
-plt.show()
+plt.savefig(fname, facecolor=fig.get_facecolor())
+# plt.show()
 plt.cla()
