@@ -135,5 +135,26 @@ class Item:
 
 
 
+class Project3:
+    def __init__(self, conn, query):
+        self.conn = conn
+        self.c = conn.cursor()
+        rows = [row for row in self.c.execute(query)]
+        self.fields = [field[0] for field in self.c.description]
+        self.items = []
+        for row in rows:
+            item = Item()
+            item.make_attrs(self.fields, row)
+            self.items.append(item)
+
+
+class Project4:
+    def __init__(self, columns, rows):
+        self.fields = columns
+        self.items = []
+        for row in rows:
+            item = Item()
+            item.make_attrs(self.fields, row)
+            self.items.append(item)
 
 
