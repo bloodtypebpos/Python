@@ -4,6 +4,10 @@ from ortools.sat.python import cp_model
 import openpyxl
 import os
 from random import randint
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+
 
 
 def get_jobs_data():
@@ -11,13 +15,14 @@ def get_jobs_data():
     fname = os.path.join(dbdir, 'MachineTasks.xlsx')
     wb = openpyxl.load_workbook(fname)
     sht = wb['Sheet1']
-    end_row = 14
+    end_row = 16
     part = sht['C2'].value
 
     jobs_data = []
     job = []
+    parts = [part]
     for i in range(2, end_row):
-        if int(sht['G'+str(i)].value) == 2:
+        if int(sht['G'+str(i)].value) == 3:
             machine_id = randint(0, 1)
         else:
             machine_id = int(sht['G'+str(i)].value)
@@ -30,8 +35,10 @@ def get_jobs_data():
             jobs_data.append(job)
             job = [task]
             part = sht['C' + str(i)].value
+        if part not in parts:
+            parts.append(part)
     jobs_data.append(job)
-    return jobs_data
+    return jobs_data, parts
 
 
 def main():
@@ -42,7 +49,7 @@ def main():
         [(0, 2), (2, 1), (1, 4)],  # Job1
         [(1, 4), (2, 3)]  # Job2
     ]
-    jobs_data = get_jobs_data()
+    jobs_data, parts = get_jobs_data()
     for job in jobs_data:
         print(job)
 
@@ -150,6 +157,17 @@ def main():
     print('  - conflicts: %i' % solver.NumConflicts())
     print('  - branches : %i' % solver.NumBranches())
     print('  - wall time: %f s' % solver.WallTime())
+    print("===============================================================================")
+    for machine in all_machines:
+        tasks = assigned_jobs[machine]
+        print(f"                 Machine: {machine}")
+        for task in tasks:
+            print(f'job: {parts[task.job]} | task: {task.index}')
+            print(f'[{task.start},{task.start + task.duration}]')
+            print("- - - - - - - - - - - - - - -")
+        print("-------------------------------------------------")
+
+
 
 
 if __name__ == '__main__':
