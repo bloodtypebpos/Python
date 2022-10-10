@@ -9,9 +9,12 @@ from PIL import ImageFont
 from PIL import ImageDraw
 from PIL import ImageColor
 import math
+import airtable_project
+from string import ascii_uppercase as alpha_cols
 
 end_row = 46
-num_iterations = 1
+num_iterations = 20
+
 
 def color_chart():
     c = ImageColor.colormap
@@ -35,34 +38,45 @@ def color_chart():
 
 
 def get_jobs_data():
-    dbdir = r'F:\PYTHON SCRIPTS\Support Files'
+    #  dbdir = r'F:\PYTHON SCRIPTS\Support Files'  #  WORK
+    dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\job_shop'  # HOME
     fname = os.path.join(dbdir, 'MachineTasks.xlsx')
     wb = openpyxl.load_workbook(fname)
     sht = wb['Sheet1']
     # end_row = 16
     part = sht['C2'].value
-
-    jobs_data = []
-    job = []
-    parts = [part]
+    attrs = []
+    rows = []
+    for i in range(0, 11):
+        attrs.append(sht[f'{alpha_cols[i]}1'].value)
     for i in range(2, end_row):
-        if int(sht['G' + str(i)].value) == 3:
+        row = []
+        for j in range(0, 11):
+            row.append(sht[f'{alpha_cols[j]}{i}'].value)
+        rows.append(row)
+    jobs = airtable_project.Project4(attrs, rows)
+    jobs = [item for item in jobs.items]
+    jobs_data = []
+    parts_info = [jobs[0]]
+    part = jobs[0].part
+    parts = []
+    work = []
+    for job in jobs:
+        machine_id = int(job.machine_id)
+        if machine_id == 3:
             machine_id = randint(0, 1)
-        else:
-            machine_id = int(sht['G' + str(i)].value)
-        processing_time = int(sht['H' + str(i)].value)
-        processing_time = processing_time + (int(sht['B' + str(i)].value) * int(sht['I' + str(i)].value))
+        processing_time = int(int(job.set_up_time) + int(job.qty) * int(job.processing_time))
         task = (machine_id, processing_time)
-        if sht['C' + str(i)].value == part:
-            job.append(task)
+        if job.part == part:
+            work.append(task)
         else:
-            jobs_data.append(job)
-            job = [task]
-            part = sht['C' + str(i)].value
-        if part not in parts:
+            jobs_data.append(work)
+            work = [task]
             parts.append(part)
-    jobs_data.append(job)
-    return jobs_data, parts
+            part = job.part
+            parts_info.append(job)
+    jobs_data.append(work)
+    return jobs_data, parts_info
 
 
 def get_tasks():
@@ -73,7 +87,7 @@ def get_tasks():
         [(0, 2), (2, 1), (1, 4)],  # Job1
         [(1, 4), (2, 3)]  # Job2
     ]
-    jobs_data, parts = get_jobs_data()
+    jobs_data, parts_info = get_jobs_data()
 
     machines_count = 1 + max(task[0] for job in jobs_data for task in job)
     all_machines = range(machines_count)
@@ -146,7 +160,7 @@ def get_tasks():
             assigned_jobs[machine].sort()
     else:
         pass
-    return assigned_jobs, solver, all_machines, parts
+    return assigned_jobs, solver, all_machines, parts_info
 
 
 def main():
@@ -154,22 +168,20 @@ def main():
     page_height = 300 * 8
     hour_width = int(page_width / 8)
     minute = int(hour_width / 60)
-    assigned_jobs_f, solver_f, all_machines_f, parts_f = get_tasks()
+    assigned_jobs_f, solver_f, all_machines_f, parts_info_f = get_tasks()
     day_width = 7 * hour_width
     for i in range(0, num_iterations):
-        assigned_jobs, solver, all_machines, parts = get_tasks()
+        assigned_jobs, solver, all_machines, parts_info = get_tasks()
         if solver.ObjectiveValue() < solver_f.ObjectiveValue():
-            assigned_jobs_f, solver_f, all_machines_f, parts_f = assigned_jobs, solver, all_machines, parts
-    assigned_jobs, solver, all_machines, parts = assigned_jobs_f, solver_f, all_machines_f, parts_f
+            assigned_jobs_f, solver_f, all_machines_f, parts_info_f = assigned_jobs, solver, all_machines, parts_info
+    assigned_jobs, solver, all_machines, parts_info = assigned_jobs_f, solver_f, all_machines_f, parts_info_f
     hours_all = int(solver.ObjectiveValue() * minute)
-
-
-
 
     img_final = Image.new("RGBA", (page_width, page_height), color="white")
     img_draw = ImageDraw.Draw(img_final)
     font_path = r'C:\Windows\Fonts\calibrib.ttf'
     font = ImageFont.truetype(font_path, 25)
+    font_big = ImageFont.truetype(font_path, 50)
 
     img = Image.new("RGBA", (hours_all, 200), color="white")
     im_draw = ImageDraw.Draw(img)
@@ -177,7 +189,6 @@ def main():
     #  use the color_chart() thing to pick colors
     job_colors = ['red', 'steelblue', 'olivedrab', 'darkorchid', 'mediumturquoise', 'darkorange', 'darkgoldenrod',
                   'mediumslateblue', 'lawngreen', 'mediumvioletred', 'sienna']
-
 
     #  Draw full bar
     for machine in all_machines:
@@ -200,14 +211,14 @@ def main():
                 else:
                     x_text = int(x_split + ((x_f - x_split) / 2))
             im_draw.rectangle([(x_s, y_s), (x_f, y_f)], fill=job_colors[task.job % len(job_colors)], outline='black')
-            im_draw.text((x_text, y_text_job), f'{parts[task.job]}', font=font, anchor=anchor, fill='black',
+            im_draw.text((x_text, y_text_job), f'{parts_info[task.job].part}', font=font, anchor=anchor, fill='black',
                          stroke_fill='white', stroke_width=3)
             im_draw.text((x_text, y_text_task), f'Task: {task.index}', font=font, anchor=anchor, fill='black',
                          stroke_fill='white', stroke_width=3)
         print("-------------------------------------------------")
     # img.show()
     page_top = (int(img.size[0] / (page_width - hour_width)) + 1) * 100 + (
-        int(img.size[0] / (page_width - hour_width))) * 200 + 200 + 100
+        int(img.size[0] / (page_width - hour_width))) * 200 + 200
 
     #  Page Template
     y_s = 0
@@ -216,9 +227,9 @@ def main():
         x_s = i * hour_width
         x_f = x_s + hour_width
         if i % 2 == 0:
-            img_draw.rectangle([(x_s, y_s), (x_f, y_f)], fill='white')  # , outline='black')
-        else:
             img_draw.rectangle([(x_s, y_s), (x_f, y_f)], fill='lightgray')  # , outline='black')
+        else:
+            img_draw.rectangle([(x_s, y_s), (x_f, y_f)], fill='white')  # , outline='black')
 
     #  Crop Full Bar Onto Page
     for i in range(0, int(img.size[0] / (page_width - hour_width))):
@@ -227,26 +238,24 @@ def main():
         y_s = (i + 1) * 100 + i * 200
         y_f = y_s + 200
         crop = img.crop((x_s, 0, x_f, 200))
-        #  img_draw.rectangle([(hour_width, y_s - 5), (page_width + hour_width, y_f + 5)], fill='black', outline='black')
         img_draw.rectangle([(0, y_s - 5), (page_width, y_f + 5)], fill='black', outline='black')
         img_draw.rectangle([(0, y_s), (page_width, y_f)], fill='white', outline='black')
-        img_draw.text((1.5 * hour_width, y_s - 25), f'DAY: {i}', font=font, anchor="mm", fill='black')
+        img_draw.text((0.5 * hour_width, y_s + 100), f'DAY: {i + 1}', font=font_big, anchor="mm", fill='black')
         img_draw.text((hour_width - 50, y_s + 33), f'VMX30', font=font, anchor="mm", fill='black')
         img_draw.text((hour_width - 50, y_s + 100), f' VM30', font=font, anchor="mm", fill='black')
         img_draw.text((hour_width - 50, y_s + 166), f'LATHE', font=font, anchor="mm", fill='black')
         img_final.paste(crop, (hour_width, y_s, page_width, y_f))
 
     x_s = int(img.size[0] / (page_width - hour_width)) * (page_width - hour_width)
-    #  x_f = x_s + page_width
     x_f = img.size[0]
-    y_s = (int(img.size[0] / (page_width - hour_width)) + 1) * 100 + (int(img.size[0] / (page_width - hour_width))) * 200
+    y_s = (int(img.size[0] / (page_width - hour_width)) + 1) * 100 + (
+        int(img.size[0] / (page_width - hour_width))) * 200
     y_f = y_s + 200
     crop = img.crop((x_s, 0, x_f, 200))
-    #  img_draw.rectangle([(hour_width, y_s - 5), (page_width, y_f + 5)], fill='black', outline='black')
-    #  img_draw.rectangle([(hour_width, y_s), (page_width, y_f)], fill='white', outline='black')
     img_draw.rectangle([(0, y_s - 5), (page_width, y_f + 5)], fill='black', outline='black')
     img_draw.rectangle([(0, y_s), (page_width, y_f)], fill='white', outline='black')
-    img_draw.text((1.5 * hour_width, y_s - 25), f'DAY: {int(img.size[0] / (page_width - hour_width))}', font=font, anchor="mm", fill='black')
+    img_draw.text((0.5 * hour_width, y_s + 100), f'DAY: {int(img.size[0] / (page_width - hour_width)) + 1}', 
+                  font=font_big, anchor="mm", fill='black')
     img_draw.text((hour_width - 50, y_s + 33), f'VMX30', font=font, anchor="mm", fill='black')
     img_draw.text((hour_width - 50, y_s + 100), f' VM30', font=font, anchor="mm", fill='black')
     img_draw.text((hour_width - 50, y_s + 166), f'LATHE', font=font, anchor="mm", fill='black')
@@ -254,33 +263,76 @@ def main():
 
     img_draw.rectangle([(0, page_top), (page_width, page_top + 5)], fill='black', outline='black')
 
-    page_bottom = page_height - page_top
+    font = ImageFont.truetype(font_path, 40)
     y_task_spacing = 100
     x_task_spacing = 200
+    machine_arr = ['VMX30', 'VM30', 'LATHE']
+    y_s = page_top + 50
+    for machine in all_machines:
+        x_s = hour_width
+        img_draw.text((0.5 * hour_width,
+                       y_s + 0.5 * y_task_spacing),
+                      machine_arr[machine], font=font_big, anchor='mm', fill='black')
+        tasks = assigned_jobs[machine]
+        for task in tasks:
+            x_f = int(task.start * minute)
+            y_f = int(task.duration * minute + x_s)
+            img_draw.rectangle([(x_s - int(0.2 * x_task_spacing), y_s - int(0.2 * y_task_spacing)),
+                                (x_s + int(1.2 * x_task_spacing), y_s + int(1.2 * y_task_spacing))],
+                               fill=job_colors[task.job % len(job_colors)], outline='black')
+            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.2 * y_task_spacing)),
+                          f'{parts_info[task.job].part}', font=font, anchor='mm', fill='black',
+                          stroke_fill='white', stroke_width=3)
+            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.5 * y_task_spacing)),
+                          f'{parts_info[task.job].Customer}', font=font, anchor='mm', fill='black',
+                          stroke_fill='white', stroke_width=3)
+            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.8 * y_task_spacing)),
+                          f'{parts_info[task.job].Sub_Assembly}', font=font, anchor='mm', fill='black',
+                          stroke_fill='white', stroke_width=3)
+            if x_s + 2 * x_task_spacing < page_width:
+                x_s = x_s + 1.5 * x_task_spacing
+            else:
+                y_s = y_s + 1.5 * y_task_spacing
+                x_s = hour_width
+        y_s = y_s + 1.5 * y_task_spacing
+        img_draw.rectangle([(0, y_s - int(0.4*y_task_spacing)),
+                            (page_width, y_s - int(0.4*y_task_spacing) + 5)],
+                           fill='black', outline='black')
 
-    x_s = hour_width + 50
+
+
+    r'''
     img_draw.rectangle([(hour_width - 3, page_top), (hour_width + 2, page_height)],
                        fill='black', outline='black')
     for machine in all_machines:
+        img_draw.text((x_s + int(0.5*x_task_spacing), page_top + 75), machine_arr[machine], 
+                      font=font_big, anchor='mm', fill='black')
         y_s = page_top + 150
         tasks = assigned_jobs[machine]
         for task in tasks:
             x_f = int(task.start * minute)
             y_f = int(task.duration * minute + x_s)
-            img_draw.rectangle([(x_s, y_s), (x_s + x_task_spacing, y_s + int(0.8*y_task_spacing))], fill=job_colors[task.job % len(job_colors)], outline='black')
-            img_draw.text((x_s + 0.5*x_task_spacing, y_s + int(0.33*y_task_spacing)), f'{parts[task.job]}', font=font, anchor='mm', fill='black',
-                         stroke_fill='white', stroke_width=3)
-            img_draw.text((x_s + 0.5*x_task_spacing, y_s + int(0.66*y_task_spacing)), f'Task: {task.index}', font=font, anchor='mm', fill='black',
-                         stroke_fill='white', stroke_width=3)
+            img_draw.rectangle([(x_s, y_s), (x_s + x_task_spacing, y_s + int(0.8 * y_task_spacing))],
+                               fill=job_colors[task.job % len(job_colors)], outline='black')
+            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.25 * y_task_spacing)),
+                          f'{parts_info[task.job].part}', font=font, anchor='mm', fill='black',
+                          stroke_fill='white', stroke_width=3)
+            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.5 * y_task_spacing)),
+                          f'{parts_info[task.job].Customer}', font=font, anchor='mm', fill='black',
+                          stroke_fill='white', stroke_width=3)
+            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.75 * y_task_spacing)),
+                          f'{parts_info[task.job].Sub_Assembly}', font=font, anchor='mm', fill='black',
+                          stroke_fill='white', stroke_width=3)
             if y_s + 2 * y_task_spacing < page_height:
                 y_s = y_s + y_task_spacing
             else:
                 y_s = page_top + 1.5 * y_task_spacing
-                x_s = x_s + 1.5*x_task_spacing
-        img_draw.rectangle([(x_s + 1.25*x_task_spacing - 3, page_top), (x_s + 1.25*x_task_spacing + 2, page_height)], fill='black', outline='black')
-        x_s = x_s + 1.5*x_task_spacing
-
-
+                x_s = x_s + 1.5 * x_task_spacing
+        img_draw.rectangle(
+            [(x_s + 1.25 * x_task_spacing - 3, page_top), (x_s + 1.25 * x_task_spacing + 2, page_height)], fill='black',
+            outline='black')
+        x_s = x_s + 1.5 * x_task_spacing
+    '''
 
 
     img_final.show()
@@ -416,7 +468,8 @@ def main1():
     img = Image.new("RGBA", (hours_all, 200), color="white")
     im_draw = ImageDraw.Draw(img)
 
-    job_colors = ['red', 'steelblue', 'olivedrab', 'darkorchid', 'mediumturquoise', 'darkorange', 'darkgoldenrod', 'mediumslateblue', 'lawngreen', 'mediumvioletred', 'sienna']
+    job_colors = ['red', 'steelblue', 'olivedrab', 'darkorchid', 'mediumturquoise', 'darkorange', 'darkgoldenrod',
+                  'mediumslateblue', 'lawngreen', 'mediumvioletred', 'sienna']
     for machine in all_machines:
         y_s = 66 * machine + machine
         y_f = y_s + 66
@@ -441,4 +494,3 @@ def main1():
 
 if __name__ == '__main__':
     main()
-
