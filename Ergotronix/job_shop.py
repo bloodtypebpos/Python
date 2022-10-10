@@ -3,6 +3,7 @@ import collections
 from ortools.sat.python import cp_model
 import openpyxl
 import os
+import sqlite3
 from random import randint
 from PIL import Image
 from PIL import ImageFont
@@ -14,7 +15,20 @@ from string import ascii_uppercase as alpha_cols
 
 end_row = 46
 num_iterations = 20
+dbdir = r'F:\PYTHON SCRIPTS\Support Files'  # WORK
+#  dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\job_shop'  # HOME
 
+
+sonums = [
+    'EH-14076-H',
+    'EH-14176-TK',
+    'ET-14137-K',
+    'ET-14181-TK'
+    ]
+
+fname = os.path.join(dbdir, 'partSort.db')
+conn = sqlite3.connect(fname)
+c = conn.cursor()
 
 def color_chart():
     c = ImageColor.colormap
@@ -37,14 +51,29 @@ def color_chart():
     i.show()
 
 
+def get_airtable_complete():
+    query = 'SELECT * FROM airtable'
+    result = airtable_project.Project3(conn, query)
+    items = [item for item in result.items]
+    return items
+
+
+def get_airtable_order(items, sonum):
+    items = [item for item in items if getattr(item, 'Reference No') == sonum and getattr(item, 'Complete') != '1']
+    return items
+
+
 def get_jobs_data():
-    #  dbdir = r'F:\PYTHON SCRIPTS\Support Files'  #  WORK
-    dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\job_shop'  # HOME
+    airtable_all = get_airtable_complete()
+    incomplete_parts = []
+    for sonum in sonums:
+        items = get_airtable_order(airtable_all, sonum)
+        for item in items:
+            incomplete_parts.append(item.Part)
+
     fname = os.path.join(dbdir, 'MachineTasks.xlsx')
     wb = openpyxl.load_workbook(fname)
     sht = wb['Sheet1']
-    # end_row = 16
-    part = sht['C2'].value
     attrs = []
     rows = []
     for i in range(0, 11):
@@ -56,6 +85,7 @@ def get_jobs_data():
         rows.append(row)
     jobs = airtable_project.Project4(attrs, rows)
     jobs = [item for item in jobs.items]
+    jobs = [item for item in jobs if item.part in incomplete_parts]
     jobs_data = []
     parts_info = [jobs[0]]
     part = jobs[0].part
@@ -254,7 +284,7 @@ def main():
     crop = img.crop((x_s, 0, x_f, 200))
     img_draw.rectangle([(0, y_s - 5), (page_width, y_f + 5)], fill='black', outline='black')
     img_draw.rectangle([(0, y_s), (page_width, y_f)], fill='white', outline='black')
-    img_draw.text((0.5 * hour_width, y_s + 100), f'DAY: {int(img.size[0] / (page_width - hour_width)) + 1}', 
+    img_draw.text((0.5 * hour_width, y_s + 100), f'DAY: {int(img.size[0] / (page_width - hour_width)) + 1}',
                   font=font_big, anchor="mm", fill='black')
     img_draw.text((hour_width - 50, y_s + 33), f'VMX30', font=font, anchor="mm", fill='black')
     img_draw.text((hour_width - 50, y_s + 100), f' VM30', font=font, anchor="mm", fill='black')
@@ -299,43 +329,9 @@ def main():
                             (page_width, y_s - int(0.4*y_task_spacing) + 5)],
                            fill='black', outline='black')
 
-
-
-    r'''
-    img_draw.rectangle([(hour_width - 3, page_top), (hour_width + 2, page_height)],
-                       fill='black', outline='black')
-    for machine in all_machines:
-        img_draw.text((x_s + int(0.5*x_task_spacing), page_top + 75), machine_arr[machine], 
-                      font=font_big, anchor='mm', fill='black')
-        y_s = page_top + 150
-        tasks = assigned_jobs[machine]
-        for task in tasks:
-            x_f = int(task.start * minute)
-            y_f = int(task.duration * minute + x_s)
-            img_draw.rectangle([(x_s, y_s), (x_s + x_task_spacing, y_s + int(0.8 * y_task_spacing))],
-                               fill=job_colors[task.job % len(job_colors)], outline='black')
-            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.25 * y_task_spacing)),
-                          f'{parts_info[task.job].part}', font=font, anchor='mm', fill='black',
-                          stroke_fill='white', stroke_width=3)
-            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.5 * y_task_spacing)),
-                          f'{parts_info[task.job].Customer}', font=font, anchor='mm', fill='black',
-                          stroke_fill='white', stroke_width=3)
-            img_draw.text((x_s + 0.5 * x_task_spacing, y_s + int(0.75 * y_task_spacing)),
-                          f'{parts_info[task.job].Sub_Assembly}', font=font, anchor='mm', fill='black',
-                          stroke_fill='white', stroke_width=3)
-            if y_s + 2 * y_task_spacing < page_height:
-                y_s = y_s + y_task_spacing
-            else:
-                y_s = page_top + 1.5 * y_task_spacing
-                x_s = x_s + 1.5 * x_task_spacing
-        img_draw.rectangle(
-            [(x_s + 1.25 * x_task_spacing - 3, page_top), (x_s + 1.25 * x_task_spacing + 2, page_height)], fill='black',
-            outline='black')
-        x_s = x_s + 1.5 * x_task_spacing
-    '''
-
-
-    img_final.show()
+    fname = os.path.join(dbdir, 'output.png')
+    img_final.save(fname)
+#    img_final.show()
 
 
 def main1():
@@ -494,3 +490,5 @@ def main1():
 
 if __name__ == '__main__':
     main()
+    
+    
