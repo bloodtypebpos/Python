@@ -1,9 +1,4 @@
-import sqlite3
 import os
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
-from PIL import ImageColor
 import airtable_project
 from airtable import Airtable
 import datetime
@@ -15,8 +10,6 @@ base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
 dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports'
 fname = os.path.join(dbdir, 'partSort.db')
-conn = sqlite3.connect(fname)
-c = conn.cursor()
 
 weekday_hours = [['8:00:00', '15:00:00'],
                  ['8:00:00', '15:00:00'],
@@ -27,12 +20,14 @@ weekday_hours = [['8:00:00', '15:00:00'],
                  ['10:00:00', '15:00:00'],
                  ]
 
+
 class Sub_Assembly:
     def __init__(self, sub_assembly, time_0):
         self.sub_assembly = sub_assembly
         self.time_0 = time_0
         self.time_1 = time_0
         self.time_bool = True
+
 
 def fix_machine_dates_start(some_date):
     global weekday_hours
@@ -125,6 +120,17 @@ def set_item_dates(items, field, new_field):
             setattr(item, new_field, datetime.datetime.strptime('2022-12-30', '%Y-%m-%d'))
 
 
+def set_item_priority(items):
+    for item in items:
+        try:
+            if item.Priority == "NA":
+                item.Priority = 0
+            else:
+                item.Priority = int(item.Priority)
+        except:
+            setattr(item, 'Priority', 0)
+
+
 machine_date_1 = fix_machine_dates_start(datetime.datetime.now())  # VMX30
 machine_date_2 = fix_machine_dates_start(datetime.datetime.now())  # VM30
 
@@ -134,7 +140,8 @@ o_items = get_items('Order Status', 'Grid view')
 e_sonums, o_sonums = get_compared_lists(e_items, o_items, 'Reference No', 'SO No')
 o_items = [o_items[0], [item for item in o_items[1] if getattr(item, 'SO No') in e_sonums]]
 set_item_dates(o_items[1], 'Ship By', 'Ship_Date')
-o_items[1].sort(key=lambda itm: itm.Ship_Date)
+set_item_priority(o_items[1])
+o_items[1].sort(key=lambda itm: (-itm.Priority, itm.Ship_Date))
 
 #  Weld / Machine / Order / Inventory (wmoi) Items
 #  We're going to divide all the engineering items (e_items) by these groups
@@ -157,11 +164,6 @@ for item in e_items[1]:
     else:
         pass
 
-
-#  Old method... not ready to delete juuuuuust yet
-#  subs = list(set([(getattr(itm, 'Reference No'), getattr(itm, 'Sub Assembly')) for itm in e_items[1]]))
-#  subs = [list(sub) for sub in subs]
-
 #  New method for getting sub assembly names, items from all engineering items etc. Parsing the projects
 #  Note: every item in o_items[1] is a project
 for item in o_items[1]:
@@ -176,7 +178,6 @@ for item in o_items[1]:
     for sub in subs:
         sub_assemblies.append(Sub_Assembly(sub, machine_date_2))
     setattr(item, 'sub_assemblies', sub_assemblies)
-
 
 #  Handle the welds first - have to run through projects twice for this reason
 #  Each o_item[1] is a project
@@ -248,9 +249,6 @@ for project in o_items[1]:
                     if time_1 > sub_assembly.time_1:
                         setattr(sub_assembly, 'time_1', time_1)
 
-
-
-
 early_date = datetime.datetime.strptime('2100-01-01', '%Y-%m-%d')
 late_date = datetime.datetime.strptime('2020-01-01', '%Y-%m-%d')
 for project in o_items[1]:
@@ -260,8 +258,7 @@ for project in o_items[1]:
         if sub_assembly.time_1 > late_date:
             late_date = sub_assembly.time_1
 
-
-colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'cyan']
+colors = ['pink', 'blue', 'green', 'yellow', 'orange', 'cyan']
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
@@ -270,17 +267,15 @@ plt.xlim([mdates.date2num(early_date) - 1, mdates.date2num(late_date) + 1])
 sub_val = 0
 sub_space = 0.2
 pval = 0
+legend = []
+print(o_items[0])
 for project in o_items[1]:
-    print(getattr(project, 'SO No'))
     print(getattr(project, 'Customer Name'))
-    print(colors[pval % len(colors)])
-    print("----------------------------------")
+    print(getattr(project, 'Ship By'))
+    print("-- -- -- -- -- -- -- -- ")
     for sub_assembly in project.sub_assemblies:
-        #print(getattr(sub_assembly, 'sub_assembly'))
         x_0 = mdates.date2num(sub_assembly.time_0)
         x_1 = mdates.date2num(sub_assembly.time_1)
-        #print(sub_assembly.time_0)
-        #print(sub_assembly.time_1)
         y_0 = sub_val + sub_space
         y_1 = 1 - 2 * sub_space
         box = patches.Rectangle((x_0, y_0),
@@ -288,12 +283,10 @@ for project in o_items[1]:
                                 y_1, color=colors[pval % len(colors)])
         sub_val = sub_val + 1
         ax.add_patch(box)
-        plt.text(x_0, y_0, sub_assembly.sub_assembly, color='black')
-        #print("- - - - - - - - - - - - - - - - - -")
+        plt.text(x_0 + 0.125, y_0 + 0.125, sub_assembly.sub_assembly, color='black')
+    legend.append(patches.Patch(color=colors[pval % len(colors)], label=getattr(project, 'Customer Name')))
     pval = pval + 1
-    print("######################################")
-
 
 plt.ylim([-1, sub_val + 1])
+plt.legend(handles=legend[::-1])  # [::-1] puts this in reverse order
 plt.show()
-
