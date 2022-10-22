@@ -61,7 +61,7 @@ def report(project):
     items = project.items
     print(" ")
     print("                               " + project.customer)
-    print(sonum)
+    print(project.sonum)
     print("TOTAL COST: $" + str(round(sum([item.Qty * item.Price for item in items]), 2)))
     print("Number of rows: " + str(len(items)))
     val1 = len(items)
@@ -195,11 +195,11 @@ def split_packet(fname):
             output.write(outputStream)
 
 
-#quick_airtable_update()
-#full_report()
+quick_airtable_update()
+full_report()
 
 
-make_packet('ET-14217-TK')
+#make_packet('ET-14034-TK')
 
 
 #packet_dir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files\ET-14137-K'
