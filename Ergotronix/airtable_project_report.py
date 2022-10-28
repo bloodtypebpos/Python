@@ -3,7 +3,9 @@ import os
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
-from airtable_project import Project, Airtable_DB
+import PIL_Tools
+import airtable_project
+from airtable_project import Project, Airtable_DB, Project4, Project5
 import matplotlib.pyplot as plt
 import math
 import requests
@@ -11,6 +13,8 @@ from PyPDF2 import PdfMerger, PdfFileWriter, PdfFileReader
 import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+import openpyxl
+import win32com.client
 
 sonum = 'EH-14076-H'
 table = 'airtable'
@@ -186,6 +190,9 @@ def make_packet(sonum):
 
 
 def split_packet(fname):
+    # packet_dir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files\ET-14137-K'
+    # fname = os.path.join(packet_dir, 'ET220310-WELDMENT.pdf')
+    # split_packet(fname)
     inputpdf = PdfFileReader(open(fname, "rb"))
     for i in range(inputpdf.numPages):
         output = PdfFileWriter()
@@ -194,41 +201,62 @@ def split_packet(fname):
         with open(outputpdf, "wb") as outputStream:
             output.write(outputStream)
 
-
-quick_airtable_update()
-full_report()
-
-
-#make_packet('ET-14034-TK')
-
-
-#packet_dir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files\ET-14137-K'
-#fname = os.path.join(packet_dir, 'ET220310-WELDMENT.pdf')
-#split_packet(fname)
+def make_sonum_pages(sonums):
+    excel = win32com.client.Dispatch("Excel.Application")
+    excel.Visible = False
+    sonum = sonums[0]
+    make_sonum_page(excel, sonum)
+    excel.Quit()
 
 
-#igus = Project(base_key, api_key, conn, 'airtable', "NA")
-#igus = [item for item in igus.items if item.Vendor.lower() == 'igus' or 'igus' in item.Description.lower()]
-#for item in igus:
-#    print(f'{str(item.Qty)}     {item.Part}      {item.Description}     {item.Customer}')
+def make_sonum_page(excel, sonum):
+    url = c.execute(f'SELECT Attachments '
+                    f'FROM airtable '
+                    f'WHERE "Reference No" = "{sonum}" '
+                    f'AND "Sub Assembly" = "0-IMAGE"')
+    url = c.fetchone()[0]
+    print(url)
+    thumbnail = Image.open(requests.get(url, stream=True).raw)
+    tn_pix = thumbnail.load()
+    background_color = tn_pix[0,0]
+    thumbnail = PIL_Tools.crop_img(thumbnail, background_color)
+    
 
 
-def uh():
-    items = Project(base_key, api_key, conn, 'airtable', 'ET-14073-H')
-    items = [item for item in items.items]
-    subs = []
-    for item in items:
-        if getattr(item, 'Sub Assembly') not in subs:
-            subs.append(getattr(item, 'Sub Assembly'))
+    thumbnail.save(os.path.join(imdir, 'tn.PNG'))
+    wb = openpyxl.load_workbook(os.path.join(imdir, 'Report_Template.xlsx'))
+    sht = wb['RT1']
+    sht_img = openpyxl.drawing.image.Image(os.path.join(imdir, 'tn.PNG'))
+    sht_img.anchor = 'G1'
+    sht.add_image(sht_img)
+    fname = os.path.join(imdir, f'{sonum}.xlsx')
+    wb.save(fname)
+    wb.close()
+    wb = excel.Workbooks.Open(fname)
+    sht = wb.Worksheets[0]
+    print_area = 'A1:G50'
+    sht.PageSetup.Zoom = False
+    sht.PageSetup.FitToPagesTall = 1
+    sht.PageSetup.FitToPagesWide = 1
+    sht.PageSetup.PrintArea = print_area
+    wb.ActiveSheet.ExportAsFixedFormat(0, os.path.join(imdir, f'{sonum}.pdf'))
+    wb.application.displayalerts = False
 
-    for sub in subs:
-        rows = [item for item in items if getattr(item, 'Sub Assembly') == sub]
-        print(f'         {sub}')
-        cost = sum([item.Qty*item.Price for item in rows])
-        print(f'${str(cost)}')
-        print("-------------------------------------------------")
+
+#quick_airtable_update()
+#full_report()
+#make_packet('RF-14249-H')
 
 
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    cost = sum([item.Qty*item.Price for item in items])
-    print(cost)
+
+e_sonums = []
+crows = c.execute('SELECT DISTINCT "Reference No" FROM airtable')
+for row in crows:
+    e_sonums.append(row[0])
+
+query = 'SELECT * FROM airtable'
+eng = airtable_project.Project3(conn, query)
+airtable_project.print_items(eng.fields, eng.items)
+
+make_sonum_pages(['EH-14076-H'])
+
