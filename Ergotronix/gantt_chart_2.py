@@ -3,7 +3,7 @@ import os
 import datetime
 from airtable import Airtable
 from PIL import Image, ImageDraw
-import PIL_tools
+import PIL_Tools
 import airtable_project
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch, cm
@@ -15,8 +15,7 @@ import matplotlib.dates as mdates
 import matplotlib.patches as patches
 
 
-
-dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports'
+dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files'
 base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
 
@@ -155,6 +154,10 @@ def make_datetime_date(item, attr):
     if getattr(item, attr) != "NA":
         return datetime.datetime.strptime(getattr(item, attr), '%Y-%m-%d')
     return "NA"
+
+
+
+
 
 # ##############################################################################
 #                       GENERAL VARIABLES
@@ -403,7 +406,14 @@ plt.savefig(os.path.join(dbdir, 'gantt.png'), bbox_inches='tight', dpi=300)
 # ##############################################################################
 e_sonums = [sonum for sonum in o_sonums if sonum in e_sonums]
 
-#sales_order = next(order for order in sales_orders if 'ET-14181-TK' == getattr(order.info, 'SO No'))
+# sales_order = next(order for order in sales_orders if 'ET-14181-TK' == getattr(order.info, 'SO No'))
+
+
+c = canvas.Canvas(os.path.join(dbdir, 'front_page.pdf'), pagesize=pagesize)  # letter = (612.0, 792.0) so maybe this is landscape?
+c.drawImage(os.path.join(dbdir, 'gantt.png'), 0, 0, pagesize[0], pagesize[1])
+c.save()
+
+print('Go Ahead')
 
 for sales_order in sales_orders:
     info = sales_order.info
@@ -516,14 +526,17 @@ for sales_order in sales_orders:
     # ##############################################################################
     url = sales_order.url
     print(url)
-    tn = Image.open(requests.get(url, stream=True).raw)
-    tn = PIL_tools.crop_img(tn, (255, 255, 255))
+    try:
+        tn = Image.open(os.path.join(dbdir, f'tn_{sonum}.png'))
+    except:
+        tn = Image.open(requests.get(url, stream=True).raw)
+    tn = PIL_Tools.crop_img(tn, (255, 255, 255))
     scale_x = page_width_half / tn.size[0]
     scale_y = page_height_half / tn.size[1]
     if scale_x < scale_y:
-        tn = PIL_tools.scale_img(tn, scale_x)
+        tn = PIL_Tools.scale_img(tn, scale_x)
     else:
-        tn = PIL_tools.scale_img(tn, scale_y)
+        tn = PIL_Tools.scale_img(tn, scale_y)
     tn.save(os.path.join(dbdir, 'tn.png'))
 
     # ##############################################################################
@@ -558,5 +571,10 @@ for sales_order in sales_orders:
     table.drawOn(c, page_width_half + 2 * pad, page_height - len(data) * 18 - 20)
     #c.showPage()
     c.save()
+
+
+
+
+
 
 
