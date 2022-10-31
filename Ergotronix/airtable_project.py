@@ -268,3 +268,31 @@ class Airtable_DB:
             query = query[:-1] + ')'
             self.c.execute(query, record)
         self.conn.commit()
+        
+        
+
+
+class SalesOrder:
+    def __init__(self,
+                 sonum,
+                 project,
+                 p_data,
+                 s_data,
+                 moi,
+                 subs,
+                 sub_assemblies,
+                 data,
+                 info,
+                 url,
+                 sub_dates_data):
+        self.sonum = sonum
+        self.project = project
+        self.p_data = p_data
+        self.s_data = s_data
+        self.moi = moi
+        self.subs = subs
+        self.sub_assemblies = sub_assemblies
+        self.data = data
+        self.info = info
+        self.url = url
+        self.sub_dates_data = sub_dates_data
