@@ -578,3 +578,102 @@ for sales_order in sales_orders:
 
 
 
+    
+    
+    import requests
+import os
+import datetime
+from airtable import Airtable
+from PIL import Image, ImageDraw, ImageFont
+import PIL_Tools
+import airtable_project
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch, cm
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus.tables import Table, TableStyle
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import matplotlib.patches as patches
+
+dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
+base_key = "appW9SUX8ihLsY2YV"
+api_key = "keyszzdobucJcnVXx"
+text_size = 18
+font = ImageFont.truetype("calibri.ttf", text_size)
+mois = ['Machine', 'Order', 'Inventory', 'Total']
+
+#  [moi_rows, moi_parts, moi_cost, moi_complete]
+moi_vals = [[100, 150, 0, 80],
+            [100, 170, 0, 70],
+            [100, 100, 0, 43],
+            [300, 420, 0, 193]]
+
+img = Image.open(os.path.join(dbdir, 'tn_moi.png'))
+drw = ImageDraw.Draw(img)
+
+thk = 1
+strip_h = 10
+row_h = int((img.size[1] - len(mois) * strip_h)/5)
+cell_pad = 5
+
+col1_w = drw.textsize("Inventory", font=font)[0]
+col2_w = drw.textsize("COMPLETE", font=font)[0]
+print(col2_w)
+col2_w = max([col2_w, int((img.size[0] - col1_w - cell_pad - thk) / 5)])
+print(col2_w)
+
+drw.rectangle((0, 0, img.size[0], img.size[1]), fill='red')
+drw.rectangle((thk, thk, img.size[0] - 2 * thk, img.size[1] - 2 * thk), fill='white')
+
+drw.rectangle((col1_w + cell_pad, 0, col1_w + cell_pad + thk, img.size[1]), fill='red')
+drw.rectangle((0, row_h, img.size[0], row_h + thk), fill='red')
+
+y0 = row_h
+
+
+moi_cols = ['ROWS', 'PARTS', 'COST', 'COMPLETE', '%']
+
+for i in range(0, len(moi_cols)):
+    x0 = col1_w + cell_pad + thk + i * col2_w
+    drw.text((x0 + (0.5 * col2_w),
+              20),
+             moi_cols[i], font=font, anchor="mm", fill='black')
+    drw.rectangle((x0 + col2_w, 0, x0 + col2_w + thk, img.size[1]), fill='red')
+
+for i in range(0, len(mois)):
+    drw.text((col1_w + 2*thk, y0 + int(row_h / 2) - 2), mois[i], font=font, anchor="rm", fill='black')
+
+    val1 = moi_vals[i][0]
+    val2 = moi_vals[i][1]
+    val3 = moi_vals[i][2]
+    val4 = moi_vals[i][3]
+    val_complete = val4 / val1
+    val_complete = int((img.size[0] - col1_w - cell_pad - thk) * val_complete)
+    drw.rectangle((col1_w + cell_pad + thk, y0 + row_h + thk,
+                   col1_w + cell_pad + thk + val_complete, y0 + row_h + thk + strip_h), fill='white')
+    drw.rectangle((col1_w + cell_pad + thk, y0 + row_h + thk,
+                   col1_w + cell_pad + thk + val_complete, y0 + row_h + thk + strip_h), fill='blue')
+
+    y0 = y0 + row_h
+    y1 = y0 + thk
+    drw.rectangle((0, y0, img.size[0], y1), fill='red')
+    drw.rectangle((0, y0 + strip_h, img.size[0], y1 + strip_h), fill='red')
+
+
+
+    y0 = y0 + strip_h
+
+img.show()
+
+
+
+
+
+
+
+
+
+
+
+
