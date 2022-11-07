@@ -2,7 +2,7 @@ import requests
 import os
 import datetime
 from airtable import Airtable
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import PIL_Tools
 import airtable_project
 from reportlab.pdfgen import canvas
@@ -15,7 +15,8 @@ import matplotlib.dates as mdates
 import matplotlib.patches as patches
 
 
-dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files'
+#dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files' #  Work
+dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
 base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
 
@@ -141,8 +142,8 @@ def make_sales_order(sonum):
     for s_field in s_fields:
         setattr(info, s_field, getattr(s_data, s_field))
     try:
-        url = next(t_item for t_item in tn_items if getattr(t_item, 'Reference No' == sonum))
-        print(url)
+        url = next(t_item for t_item in tn_items if getattr(t_item, 'Reference No') == sonum)
+        url = getattr(url, 'Attachments')[0]['url']
     except:
         url = img_na
     sonum_sales_order = airtable_project.SalesOrder \
@@ -156,6 +157,92 @@ def make_datetime_date(item, attr):
     return "NA"
 
 
+def make_moi_data(items):
+    moi_rows = len(items)
+    moi_parts = sum([getattr(item, 'Qty') for item in items])
+    moi_cost = sum([round(int(getattr(item, 'Qty')) * float(getattr(item, 'Price')), 2) for item in items])
+    moi_complete = len([item for item in items if getattr(item, 'Complete') != 'NA'])
+    return [moi_rows, moi_parts, moi_cost, moi_complete]
+
+def make_stats_data(sales_order):
+    global a_items
+    sonum = sales_order.sonum
+    aa_items = [item for item in a_items if getattr(item, 'Reference No') == sonum]
+    moi_data = []
+    for moi_code in ['Machine', 'Order', 'Inventory']:
+        if moi_code == 'Machine':
+            m_items = [item for item in aa_items if getattr(item, 'Code') == 'Machine'] + \
+                      [item for item in aa_items if getattr(item, 'Code') == 'Weld']
+        else:
+            m_items = [item for item in aa_items if getattr(item, 'Code') == moi_code]
+        moi_data.append(make_moi_data(m_items))
+    total_row = []
+    for ii in range(0, len(moi_data[0])):
+        total_row.append(sum([moi_d[ii] for moi_d in moi_data]))
+    moi_data.append(total_row)
+    return moi_data
+
+def make_data_rect(moi_vals):
+    text_size = 18
+    font = ImageFont.truetype("calibri.ttf", text_size)
+    mois = ['Machine', 'Order', 'Inventory', 'Total']
+
+    #  [moi_rows, moi_parts, moi_cost, moi_complete]
+    #moi_vals = [[100, 150, 0, 80],
+    #            [100, 170, 0, 70],
+    #            [100, 100, 0, 43],
+    #            [300, 420, 0, 193]]
+
+    img = Image.open(os.path.join(dbdir, 'tn_moi.png'))
+    drw = ImageDraw.Draw(img)
+    thk = 1
+    strip_h = 10
+    row_h = int((img.size[1] - len(mois) * strip_h)/5)
+    cell_pad = 5
+    col1_w = drw.textsize("Inventory", font=font)[0]
+    col2_w = drw.textsize("COMPLETE", font=font)[0]
+    col2_w = max([col2_w, int((img.size[0] - col1_w - cell_pad - thk) / 5)])
+    drw.rectangle((0, 0, img.size[0], img.size[1]), fill='red')
+    drw.rectangle((thk, thk, img.size[0] - 2 * thk, img.size[1] - 2 * thk), fill='white')
+    drw.rectangle((col1_w + cell_pad, 0, col1_w + cell_pad + thk, img.size[1]), fill='red')
+    drw.rectangle((0, row_h, img.size[0], row_h + thk), fill='red')
+    y0 = row_h
+    moi_cols = ['ROWS', 'PARTS', 'COST', 'COMPLETE', '%']
+
+    for i in range(0, len(moi_cols)):
+        x0 = col1_w + cell_pad + thk + i * col2_w
+        drw.text((x0 + (0.5 * col2_w),
+                  20),
+                 moi_cols[i], font=font, anchor="mm", fill='black')
+        drw.rectangle((x0 + col2_w, 0, x0 + col2_w + thk, img.size[1]), fill='red')
+
+    for i in range(0, len(mois)):
+        drw.text((col1_w + 2*thk, y0 + int(row_h / 2) - 2), mois[i], font=font, anchor="rm", fill='black')
+        val1 = moi_vals[i][0]
+        val2 = moi_vals[i][1]
+        val3 = moi_vals[i][2]
+        val4 = moi_vals[i][3]
+        try:
+            val_complete = val4 / val1
+        except:
+            val_complete = 0
+        moi_vals[i].append(int(round(100 * val_complete, 2)))
+        val_complete = int((img.size[0] - col1_w - cell_pad - thk) * val_complete)
+        for j in range(0, len(moi_cols)):
+            x0 = col1_w + cell_pad + thk + j * col2_w
+            drw.text((x0 + (0.5 * col2_w),
+                      y0 + int(row_h / 2) - 2),
+                     f'{moi_vals[i][j]}', font=font, anchor="mm", fill='black')
+        drw.rectangle((col1_w + cell_pad + thk, y0 + row_h + thk,
+                       col1_w + cell_pad + thk + val_complete, y0 + row_h + thk + strip_h), fill='blue')
+        y0 = y0 + row_h
+        y1 = y0 + thk
+        drw.rectangle((0, y0, img.size[0], y1), fill='red')
+        drw.rectangle((0, y0 + strip_h, img.size[0], y1 + strip_h), fill='red')
+        y0 = y0 + strip_h
+
+    #img.show()
+    img.save(os.path.join(dbdir, 'moi_rect.png'))
 
 
 
@@ -197,6 +284,7 @@ page_height_half = (page_height) / 2
 # ##############################################################################
 #                       FULL AIRTABLE INFO FOR ALL SONUMS
 # ##############################################################################
+a_fields, a_items = get_items(base_key, api_key, 'Procurement and Fabrication', 'Engineering')
 e_fields, e_items = get_items(base_key, api_key, 'Procurement and Fabrication', 'Engineering')
 o_fields, o_items = get_items(base_key, api_key, 'Order Status', 'Grid view')
 s_fields, s_items = get_items(base_key, api_key, 'Approval Drawings and Packets', 'Engineering')
@@ -461,11 +549,8 @@ for sales_order in sales_orders:
     legend = []
     y_max = len(sales_order.subs) * 0.5
     y_text = 0
-    #print("------------------------------------------------------------")
-    #print(sonum)
     for i in range(0, len(so_dates)):
         try:
-            #print(so_dates[i])
             x_0 = mdates.date2num(so_dates[i]) - 0.1
             x_1 = mdates.date2num(so_dates[i]) + 0.1
             y_0 = 0
@@ -515,10 +600,12 @@ for sales_order in sales_orders:
     figure.set_size_inches(12, 3)  # set figure's size manually to your full screen (32x18)
     plt.savefig(os.path.join(dbdir, f'hist_{sonum}.png'), bbox_inches='tight', dpi=300)
 
-    moi_info = []
-    moi_fields = []
+    # ##############################################################################
+    #                       MOI TABLE
+    # ##############################################################################
 
-
+    moi_data = make_stats_data(sales_order)
+    make_data_rect(moi_data)
 
 
     # ##############################################################################
@@ -526,10 +613,11 @@ for sales_order in sales_orders:
     # ##############################################################################
     url = sales_order.url
     print(url)
-    try:
-        tn = Image.open(os.path.join(dbdir, f'tn_{sonum}.png'))
-    except:
-        tn = Image.open(requests.get(url, stream=True).raw)
+    #try:
+    #    tn = Image.open(os.path.join(dbdir, f'tn_{sonum}.png'))
+    #except:
+    #    tn = Image.open(requests.get(url, stream=True).raw)
+    tn = Image.open(requests.get(url, stream=True).raw)
     tn = PIL_Tools.crop_img(tn, (255, 255, 255))
     scale_x = page_width_half / tn.size[0]
     scale_y = page_height_half / tn.size[1]
@@ -545,9 +633,6 @@ for sales_order in sales_orders:
 
     time_x_width = int(pagesize[0]) - 2 * pad
     time_y_height = int(page_height_half) - 3 * pad
-    #x_inch = int(time_x_width / 11)
-    #time_img = Image.new("RGB", (time_x_width, time_y_width), 'white')
-    #time_img1 = ImageDraw.Draw(time_img)
 
     # ##############################################################################
     #                       CREATING THE PDF
@@ -558,6 +643,8 @@ for sales_order in sales_orders:
     # c.drawImage(os.path.join(dbdir, 'tn.png'), x_left, y_bottom, x_width, y_height)  # gist of image placement
     c.drawImage(os.path.join(dbdir, 'tn.png'), pad, pagesize[1] - tn.size[1] - pad, tn.size[0], tn.size[1])
     c.drawImage(os.path.join(dbdir, f'hist_{sonum}.png'), pad, pad, time_x_width, time_y_height)
+    # c.drawImage(os.path.join(dbdir, 'tn_moi.png'), page_width_half + pad, page_height_half, 350, 125)
+    c.drawImage(os.path.join(dbdir, 'moi_rect.png'), page_width_half + pad, page_height_half, 350, 125)
     # data = [(1, 2), (3, "This is just a test")]
     data = sales_order.data
     table = Table(data)  # , colWidths=page_width_half / 3, rowHeights=10)
@@ -568,109 +655,9 @@ for sales_order in sales_orders:
                                ('BOX', (0, 0), (1, len(data)), 0.25, colors.black)
                                ]))
     table.wrapOn(c, 100, 100)
-    table.drawOn(c, page_width_half + 2 * pad, page_height - len(data) * 18 - 20)
+    table.drawOn(c, page_width_half + pad, page_height - len(data) * 18 - 20)
     #c.showPage()
     c.save()
-
-
-
-
-
-
-
-    
-    
-    import requests
-import os
-import datetime
-from airtable import Airtable
-from PIL import Image, ImageDraw, ImageFont
-import PIL_Tools
-import airtable_project
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch, cm
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus.tables import Table, TableStyle
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.patches as patches
-
-dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
-base_key = "appW9SUX8ihLsY2YV"
-api_key = "keyszzdobucJcnVXx"
-text_size = 18
-font = ImageFont.truetype("calibri.ttf", text_size)
-mois = ['Machine', 'Order', 'Inventory', 'Total']
-
-#  [moi_rows, moi_parts, moi_cost, moi_complete]
-moi_vals = [[100, 150, 0, 80],
-            [100, 170, 0, 70],
-            [100, 100, 0, 43],
-            [300, 420, 0, 193]]
-
-img = Image.open(os.path.join(dbdir, 'tn_moi.png'))
-drw = ImageDraw.Draw(img)
-
-thk = 1
-strip_h = 10
-row_h = int((img.size[1] - len(mois) * strip_h)/5)
-cell_pad = 5
-
-col1_w = drw.textsize("Inventory", font=font)[0]
-col2_w = drw.textsize("COMPLETE", font=font)[0]
-print(col2_w)
-col2_w = max([col2_w, int((img.size[0] - col1_w - cell_pad - thk) / 5)])
-print(col2_w)
-
-drw.rectangle((0, 0, img.size[0], img.size[1]), fill='red')
-drw.rectangle((thk, thk, img.size[0] - 2 * thk, img.size[1] - 2 * thk), fill='white')
-
-drw.rectangle((col1_w + cell_pad, 0, col1_w + cell_pad + thk, img.size[1]), fill='red')
-drw.rectangle((0, row_h, img.size[0], row_h + thk), fill='red')
-
-y0 = row_h
-
-
-moi_cols = ['ROWS', 'PARTS', 'COST', 'COMPLETE', '%']
-
-for i in range(0, len(moi_cols)):
-    x0 = col1_w + cell_pad + thk + i * col2_w
-    drw.text((x0 + (0.5 * col2_w),
-              20),
-             moi_cols[i], font=font, anchor="mm", fill='black')
-    drw.rectangle((x0 + col2_w, 0, x0 + col2_w + thk, img.size[1]), fill='red')
-
-for i in range(0, len(mois)):
-    drw.text((col1_w + 2*thk, y0 + int(row_h / 2) - 2), mois[i], font=font, anchor="rm", fill='black')
-
-    val1 = moi_vals[i][0]
-    val2 = moi_vals[i][1]
-    val3 = moi_vals[i][2]
-    val4 = moi_vals[i][3]
-    val_complete = val4 / val1
-    val_complete = int((img.size[0] - col1_w - cell_pad - thk) * val_complete)
-    drw.rectangle((col1_w + cell_pad + thk, y0 + row_h + thk,
-                   col1_w + cell_pad + thk + val_complete, y0 + row_h + thk + strip_h), fill='white')
-    drw.rectangle((col1_w + cell_pad + thk, y0 + row_h + thk,
-                   col1_w + cell_pad + thk + val_complete, y0 + row_h + thk + strip_h), fill='blue')
-
-    y0 = y0 + row_h
-    y1 = y0 + thk
-    drw.rectangle((0, y0, img.size[0], y1), fill='red')
-    drw.rectangle((0, y0 + strip_h, img.size[0], y1 + strip_h), fill='red')
-
-
-
-    y0 = y0 + strip_h
-
-img.show()
-
-
-
-
-
-
 
 
 
