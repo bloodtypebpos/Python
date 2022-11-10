@@ -15,8 +15,8 @@ import matplotlib.dates as mdates
 import matplotlib.patches as patches
 
 
-#dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files' #  Work
-dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
+dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files' #  Work
+#dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
 base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
 
@@ -366,7 +366,7 @@ for sales_order in sales_orders:
                 sub_dates.time_1 = machine_date_2
                 sub_dates.time_bool = False
             weld.start_date = machine_date_2
-            machine_date_2 = move_machine_time(machine_date_2, 2)
+            machine_date_2 = move_machine_time(machine_date_2, 3)
             weld.end_date = machine_date_2
         sub_dates.time_1 = machine_date_2
 
@@ -383,7 +383,11 @@ for sales_order in sales_orders:
     fins = [item for item in sales_order.project
             if getattr(item, 'Code') == 'Finish']
     welds = len(welds) + 3
-    fins = len(fins) + 4
+    fin_subs = []
+    for fin in fins:
+        if getattr(item, 'Sub Assembly') not in fin_subs:
+            fin_subs.append(getattr(item, 'Sub Assembly'))
+    fins = len(fin_subs) + 4
     if welds > 3:
         weld_date_1 = max([weld_date.time_1 for weld_date in sales_order.sub_dates_data]) + \
                       datetime.timedelta(days=welds)
@@ -392,6 +396,8 @@ for sales_order in sales_orders:
             sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
             sub_dates.time_1 = weld_date_1
 
+    print(f'welds: {welds}')
+    print(f'fins:  {fins}')
     if fins > 4:
         finish_date_1 = max(finish_date_1, weld_date_1) + \
                       datetime.timedelta(days=fins)
@@ -418,9 +424,9 @@ for sales_order in sales_orders:
                     setattr(sub_dates, 'time_1', machine_date_2)
                     setattr(sub_dates, 'time_bool', False)
             if machine_date_1 < machine_date_2:
-                machine_date_1 = move_machine_time(machine_date_1, 2)
+                machine_date_1 = move_machine_time(machine_date_1, 3)
             else:
-                machine_date_2 = move_machine_time(machine_date_2, 2)
+                machine_date_2 = move_machine_time(machine_date_2, 3)
             if sub_dates.time_1 < machine_date_1:
                 sub_dates.time_1 = machine_date_1
             elif sub_dates.time_1 < machine_date_2:
@@ -658,9 +664,5 @@ for sales_order in sales_orders:
     table.drawOn(c, page_width_half + pad, page_height - len(data) * 18 - 20)
     #c.showPage()
     c.save()
-
-
-
-
 
 
