@@ -315,7 +315,6 @@ moi_codes = ['Weld',
 e_items = [item for item in e_items if getattr(item, 'Complete') == 'NA']
 tn_items = [item for item in tn_items if getattr(item, 'Sub Assembly') == '0-IMAGE']
 tn_item = next(item for item in tn_items if getattr(item, 'Reference No') == 'ET-14217-TK')
-print(getattr(tn_items[0], 'Attachments')[0]['url'])
 for item in e_items:
     setattr(item, 'start_date', datetime.datetime.now())
     setattr(item, 'end_date', datetime.datetime.now())
@@ -353,6 +352,7 @@ sales_orders = [make_sales_order(sonum) for sonum in o_sonums if sonum in e_sonu
 # ##################################################################################
 #           1: THE WELD PARTS THAT NEED TO BE MACHINED
 #           Note: Loop through all Sales Orders to get all weld parts up to front
+# ##################################################################################
 
 for sales_order in sales_orders:
     for sub_assembly in sales_order.sub_assemblies:
@@ -374,20 +374,14 @@ for sales_order in sales_orders:
 #           2: THE WELDMENTS AND PARTS THAT NEED TO BE WELDED/FINISHED (PAINT ETC)
 #           Note: Might need to rethink how the weldment dates are tracked...
 #           Note: Again, loop through all Sales Orders to get parts to welding/painting
+# ##################################################################################
+
 weldments = 0
-finishes = 0
 for sales_order in sales_orders:
     welds = [item for item in sales_order.project
              if 'weldment' in getattr(item, 'Notes').lower()
              and getattr(item, 'Code') == 'Weld']
-    fins = [item for item in sales_order.project
-            if getattr(item, 'Code') == 'Finish']
     welds = len(welds) + 3
-    fin_subs = []
-    for fin in fins:
-        if getattr(item, 'Sub Assembly') not in fin_subs:
-            fin_subs.append(getattr(item, 'Sub Assembly'))
-    fins = len(fin_subs) + 4
     if welds > 3:
         weld_date_1 = max([weld_date.time_1 for weld_date in sales_order.sub_dates_data]) + \
                       datetime.timedelta(days=welds)
@@ -396,18 +390,11 @@ for sales_order in sales_orders:
             sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
             sub_dates.time_1 = weld_date_1
 
-    print(f'welds: {welds}')
-    print(f'fins:  {fins}')
-    if fins > 4:
-        finish_date_1 = max(finish_date_1, weld_date_1) + \
-                      datetime.timedelta(days=fins)
-        for sub_assembly in sales_order.sub_assemblies:
-            sub = next(getattr(item, 'Sub Assembly') for item in sub_assembly)
-            sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
-            sub_dates.time_1 = finish_date_1
 
 # ##################################################################################
-#           3: ALL MACHINED PARTS IN EACH ORDERS SUB ASSEMBLIES AND ORDERED PARTS
+#           3: ALL MACHINED PARTS IN EACH ORDERS SUB ASSEMBLIES
+# ##################################################################################
+
 for sales_order in sales_orders:
     for sub_assembly in sales_order.sub_assemblies:
         sub = next(getattr(item, 'Sub Assembly') for item in sub_assembly)
@@ -429,13 +416,63 @@ for sales_order in sales_orders:
                 machine_date_2 = move_machine_time(machine_date_2, 3)
             if sub_dates.time_1 < machine_date_1:
                 sub_dates.time_1 = machine_date_1
-            elif sub_dates.time_1 < machine_date_2:
+            if sub_dates.time_1 < machine_date_2:
                 sub_dates.time_1 = machine_date_2
         for item in sub_assembly:
             if item.ETA != "NA":
                 if datetime.datetime.strptime(item.ETA, '%Y-%m-%d') > sub_dates.time_1:
                     sub_dates.time_1 = datetime.datetime.strptime(item.ETA, '%Y-%m-%d')
 
+# ##################################################################################
+#           4: ALL FINISHED PARTS IN EACH ORDERS SUB ASSEMBLIES
+# ##################################################################################
+
+finishes = 0
+for sales_order in sales_orders:
+    fins = [item for item in sales_order.project
+            if getattr(item, 'Code') == 'Finish']
+    fin_subs = []
+    fin_sub_codes = []
+    print_items(e_fields, fins)
+    for fin in fins:
+        fin_codes = []
+        if getattr(fin, 'Sub Assembly') not in fin_subs:
+            fin_subs.append(getattr(fin, 'Sub Assembly'))
+        if getattr(fin, 'Notes') not in fin_codes:
+            if getattr(fin, 'Notes').lower() == 'machine':
+                fin_codes.append(0)
+        fin_sub_codes.append(fin_codes)
+
+    fin_num = len(fin_subs)
+    if fin_num + 4 > 4:
+        print(sales_order.sonum)
+        for i in range(0, len(fin_subs)):
+            fin_sub = fin_subs[i]
+            fin = [item for item in fins if getattr(item, 'Sub Assembly') == fin_sub]
+            fin_codes = fin_sub_codes[i]
+            if 0 in fin_codes:
+                finish_date_1 = max([finish_date_1, weld_date_1, machine_date_1, machine_date_2]) + \
+                              datetime.timedelta(days=fin_num)
+            else:
+                finish_date_1 = max(finish_date_1, weld_date_1) + \
+                              datetime.timedelta(days=fin_num)
+            for sub_assembly in sales_order.sub_assemblies:
+                sub = next(getattr(item, 'Sub Assembly') for item in sub_assembly)
+                sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
+                sub_dates.time_1 = finish_date_1
+
+# ##################################################################################
+#           5: ALL ETA PARTS IN EACH ORDERS SUB ASSEMBLIES
+# ##################################################################################
+
+for sales_order in sales_orders:
+    for sub_assembly in sales_order.sub_assemblies:
+        sub = next(getattr(item, 'Sub Assembly') for item in sub_assembly)
+        sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
+        for item in sub_assembly:
+            if item.ETA != "NA":
+                if datetime.datetime.strptime(item.ETA, '%Y-%m-%d') > sub_dates.time_1:
+                    sub_dates.time_1 = datetime.datetime.strptime(item.ETA, '%Y-%m-%d')
 
 # ##############################################################################
 #                       GANTT CHART FULL
@@ -452,8 +489,8 @@ for sales_order in sales_orders:
         if sub_dates.time_1 > late_date:
             late_date = sub_dates.time_1
 
-sub_colors = ['pink', 'blue', 'green', 'yellow', 'orange', 'cyan']
-txt_colors = ['pink', 'blue', 'green', 'yellow', 'orange', 'cyan']
+sub_colors = ['pink', 'deepskyblue', 'green', 'yellow', 'orange', 'cyan']
+txt_colors = ['pink', 'blue', 'green', 'gold', 'orange', 'cyan']
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
@@ -618,11 +655,6 @@ for sales_order in sales_orders:
     #                       PROJECT THUMBNAIL (TOP LEFT IMAGE)
     # ##############################################################################
     url = sales_order.url
-    print(url)
-    #try:
-    #    tn = Image.open(os.path.join(dbdir, f'tn_{sonum}.png'))
-    #except:
-    #    tn = Image.open(requests.get(url, stream=True).raw)
     tn = Image.open(requests.get(url, stream=True).raw)
     tn = PIL_Tools.crop_img(tn, (255, 255, 255))
     scale_x = page_width_half / tn.size[0]
