@@ -15,8 +15,8 @@ import matplotlib.dates as mdates
 import matplotlib.patches as patches
 
 
-dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files' #  Work
-#dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
+#dbdir = r'F:\PYTHON SCRIPTS\Support Files\Project Cost Files' #  Work
+dbdir = r'C:\Users\Sad_Matt\Desktop\Python\Ergotronix\reports' #  Home
 base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
 
@@ -433,7 +433,6 @@ for sales_order in sales_orders:
             if getattr(item, 'Code') == 'Finish']
     fin_subs = []
     fin_sub_codes = []
-    print_items(e_fields, fins)
     for fin in fins:
         fin_codes = []
         if getattr(fin, 'Sub Assembly') not in fin_subs:
@@ -445,7 +444,6 @@ for sales_order in sales_orders:
 
     fin_num = len(fin_subs)
     if fin_num + 4 > 4:
-        print(sales_order.sonum)
         for i in range(0, len(fin_subs)):
             fin_sub = fin_subs[i]
             fin = [item for item in fins if getattr(item, 'Sub Assembly') == fin_sub]
