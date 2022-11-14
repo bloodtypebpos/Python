@@ -21,6 +21,10 @@ base_key = "appW9SUX8ihLsY2YV"
 api_key = "keyszzdobucJcnVXx"
 
 
+mac_hr_base = 3
+mac_min_base = 15
+tick_div = 12
+
 class SubDatesData:
     def __init__(self, sub, time_0):
         self.sub = sub
@@ -361,12 +365,13 @@ for sales_order in sales_orders:
                  if getattr(item, 'Code') == 'Weld' and 'weldment' not in getattr(item, 'Notes').lower()]
         sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
         for weld in welds:
+            mac_addit = mac_hr_base + ((mac_min_base * int(getattr(weld, 'Qty'))) / 60)
             if sub_dates.time_bool:
                 sub_dates.time_0 = machine_date_2
                 sub_dates.time_1 = machine_date_2
                 sub_dates.time_bool = False
             weld.start_date = machine_date_2
-            machine_date_2 = move_machine_time(machine_date_2, 3)
+            machine_date_2 = move_machine_time(machine_date_2, mac_addit)
             weld.end_date = machine_date_2
         sub_dates.time_1 = machine_date_2
 
@@ -401,6 +406,7 @@ for sales_order in sales_orders:
         mac_parts = [item for item in sub_assembly if getattr(item, 'Code') == 'Machine']
         sub_dates = next(item for item in sales_order.sub_dates_data if getattr(item, 'sub') == sub)
         for mac_part in mac_parts:
+            mac_addit = mac_hr_base + ((mac_min_base * int(getattr(mac_part, 'Qty'))) / 60)
             if sub_dates.time_bool:
                 if machine_date_1 < machine_date_2:
                     setattr(sub_dates, 'time_0', machine_date_1)
@@ -411,9 +417,9 @@ for sales_order in sales_orders:
                     setattr(sub_dates, 'time_1', machine_date_2)
                     setattr(sub_dates, 'time_bool', False)
             if machine_date_1 < machine_date_2:
-                machine_date_1 = move_machine_time(machine_date_1, 3)
+                machine_date_1 = move_machine_time(machine_date_1, mac_addit)
             else:
-                machine_date_2 = move_machine_time(machine_date_2, 3)
+                machine_date_2 = move_machine_time(machine_date_2, mac_addit)
             if sub_dates.time_1 < machine_date_1:
                 sub_dates.time_1 = machine_date_1
             if sub_dates.time_1 < machine_date_2:
@@ -494,6 +500,12 @@ ax = fig.add_subplot(111)
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 plt.xlim([mdates.date2num(early_date) - 1, mdates.date2num(late_date) + 1])
 
+daynums = late_date - early_date
+daynums = daynums.days
+if daynums > 10:
+    daynums = int(daynums/tick_div)
+else:
+    daynums = 1
 sub_val = 0
 sub_space = 0.2
 pval = 0
@@ -523,7 +535,7 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['left'].set_visible(False)
 ax.get_yaxis().set_ticks([])
-ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+ax.xaxis.set_major_locator(mdates.DayLocator(interval=daynums))
 plt.gcf().autofmt_xdate()
 figure = plt.gcf()  # get current figure
 figure.set_size_inches(12, 8)  # set figure's size manually to your full screen (32x18)
@@ -583,6 +595,13 @@ for sales_order in sales_orders:
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     plt.xlim([mdates.date2num(early_date) - 1, mdates.date2num(late_date) + 1])
 
+    daynums = late_date - early_date
+    daynums = daynums.days
+    if daynums > 10:
+        daynums = int(daynums / tick_div)
+    else:
+        daynums = 1
+
     sub_val = 1
     sub_space = 0.1
     sub_height = 0.3
@@ -633,7 +652,7 @@ for sales_order in sales_orders:
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_visible(False)
     ax.get_yaxis().set_ticks([])
-    ax.xaxis.set_major_locator(mdates.DayLocator(interval=5))
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=daynums))
     plt.gcf().autofmt_xdate()
     plt.ylim([0, y_max + 1])
     plt.tight_layout()
