@@ -2,7 +2,11 @@ import os
 import sqlite3
 import openpyxl
 
-dbdir = r'F:\PYTHON SCRIPTS\Support Files'
+manual_qty = True
+remove_qty = False
+
+
+dbdir = r'C:\Users\Sad_Matt\Desktop\Ergotronix\hardware'
 os.chdir(dbdir)
 
 fname = 'partSort.db'
@@ -18,7 +22,8 @@ for i in range(2, sht.max_row + 1):
     pids.append(sht[f'A{i}'].value)
     row = [sht[f'A{i}'].value,
            sht[f'B{i}'].value,
-           sht[f'C{i}'].value]
+           sht[f'C{i}'].value,
+           sht[f'D{i}'].value]
     pid_rows.append(row)
 
 alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -73,10 +78,6 @@ for i in range(0, len(pids)):
 
         else:
             pass
-#    for j in range(0, len(attrs)):
-#        print(f'{attrs[j]}: {alpha[attr_vals[j]]}')
-    print("=======================================================================")
-
 
 q = f'INSERT INTO hw1("hwid", "pid", '
 for attr in attrs:
@@ -85,7 +86,7 @@ q = q[:-2] + ') VALUES('
 for row in rows:
     query = f'{q}'
     for r in row:
-        ro = str(r).replace('"', '``')
+        ro = str(r).replace('"', '')
         query = f'{query}"{ro}", '
     query = query[:-2] + ')'
     print(row)
@@ -94,19 +95,27 @@ conn.commit()
 
 pid_rows = []
 order_pids = []
-fname = 'OpenOrdersFull.xlsx'
-wb = openpyxl.load_workbook(fname)
-sht = wb['Open Sales Orders']
-for i in range(2, sht.max_row + 1):
-    if sht[f'H{i}'].value in pids:
-        if sht[f'H{i}'].value not in order_pids:
-            order_pids.append(sht[f'H{i}'].value)
-for pid in order_pids:
-    num = 0
+
+if manual_qty:
+    print("Let's a go!")
+    sht = wb['Items']
     for i in range(2, sht.max_row + 1):
-        if sht[f'H{i}'].value == pid:
-            num = num + int(sht[f'K{i}'].value)
-    pid_rows.append([pid, num])
+        if int(sht[f'D{i}'].value) > 0:
+            pid_rows.append([sht[f'A{i}'].value, int(sht[f'D{i}'].value)])
+else:
+    fname = 'OpenOrdersFull.xlsx'
+    wb = openpyxl.load_workbook(fname)
+    sht = wb['Open Sales Orders']
+    for i in range(2, sht.max_row + 1):
+        if sht[f'H{i}'].value in pids:
+            if sht[f'H{i}'].value not in order_pids:
+                order_pids.append(sht[f'H{i}'].value)
+    for pid in order_pids:
+        num = 0
+        for i in range(2, sht.max_row + 1):
+            if sht[f'H{i}'].value == pid:
+                num = num + int(sht[f'K{i}'].value)
+        pid_rows.append([pid, num])
 add_rows = []
 for pid_row in pid_rows:
     pid = pid_row[0]
@@ -190,6 +199,47 @@ for mcmaster in mcmasters:
 print("================================================================")
 print("================================================================")
 print("================================================================")
+
+attrs2 = ['LOCATION', 'STOCK', 'DIFF', 'LINK']
+for row in add_rows:
+    try:
+        mcmaster = row[-1]
+        query = f'SELECT LOCATION, ACTUAL FROM hardware WHERE "McMaster-Carr" = "{mcmaster}"'
+        crows = c.execute(query)
+        rows = []
+        for crow in crows:
+            rows.append(crow)
+        crow = rows[0]
+        row.append(crow[0])
+        row.append(crow[1])
+        val = row[-1] - row[2]
+        row.append(val)
+        row.append(f'https://www.mcmaster.com/' + mcmaster + f'/')
+    except:
+        print("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(row)
+        print("...........................................................")
+
+
+def endit():
+    num = 2
+    fname = 'zPickList.xlsx'
+    wb = openpyxl.load_workbook(fname)
+    sht = wb['Sheet2']
+    sht[f'A1'].value = 'LINE'
+    for i in range(0, len(attrs)):
+        sht[f'{alpha[i+1]}1'].value = attrs[i]
+    for row in add_rows:
+        print(row)
+        sht[f'A{num}'].value = num-1
+        val = 1
+        for i in range(2, len(row)):
+            sht[f'{alpha[val]}{num}'].value = row[i]
+            val = val + 1
+        num = num + 1
+    wb.save(fname)
+
+
 num = 2
 fname = 'zPickList.xlsx'
 wb = openpyxl.load_workbook(fname)
@@ -197,6 +247,8 @@ sht = wb['Sheet2']
 sht[f'A1'].value = 'LINE'
 for i in range(0, len(attrs)):
     sht[f'{alpha[i+1]}1'].value = attrs[i]
+for i in range(0, len(attrs2)):
+    sht[f'{alpha[i+1+len(attrs)]}1'].value = attrs2[i]
 for row in add_rows:
     print(row)
     sht[f'A{num}'].value = num-1
@@ -206,9 +258,5 @@ for row in add_rows:
         val = val + 1
     num = num + 1
 wb.save(fname)
-
-
-
-
 
 
